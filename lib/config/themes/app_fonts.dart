@@ -1,0 +1,3 @@
+class AppFonts{
+  AppFonts._();
+}
