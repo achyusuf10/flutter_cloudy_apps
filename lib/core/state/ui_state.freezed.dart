@@ -280,7 +280,7 @@ class __$$UIStateEmptyImplCopyWithImpl<T, $Res>
 
 class _$UIStateEmptyImpl<T> implements UIStateEmpty<T> {
   const _$UIStateEmptyImpl(
-      {this.message = 'Maaf, saat ini data kamu tidak tersedia'});
+      {this.message = 'Sorry, your data is not available'});
 
   @override
   @JsonKey()
@@ -553,8 +553,7 @@ class __$$UIStateErrorImplCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$UIStateErrorImpl<T> implements UIStateError<T> {
-  const _$UIStateErrorImpl(
-      {this.message = 'Terjadi Kesalahan, Silahkan Coba Lagi'});
+  const _$UIStateErrorImpl({this.message = 'Upps, please try again'});
 
   @override
   @JsonKey()

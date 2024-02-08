@@ -1,5 +1,6 @@
-import 'package:cloudy/app/features/home/domain/entities/forecast_weather_entity.dart';
+import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart';
 import 'package:cloudy/app/features/home/presentation/blocs/home/home_bloc.dart';
+import 'package:cloudy/app/widgets/general_empty_widget.dart';
 import 'package:cloudy/app/widgets/shimmer_widget.dart';
 import 'package:cloudy/config/themes/app_colors.dart';
 import 'package:cloudy/constants/core/svg_assets_const.dart';
@@ -31,10 +32,18 @@ class HomeDetailsComponent extends StatelessWidget {
             ),
           ),
           8.verticalSpace,
-          BlocSelector<HomeBloc, HomeState, UIState<ForecastWeatherEntity>>(
+          BlocSelector<HomeBloc, HomeState, UIState<WeatherEntity>>(
             selector: (state) => state.currentWeatherCondition,
             builder: (context, state) {
               return state.maybeWhen(
+                error: (message) {
+                  return GeneralEmptyErrorWidget(
+                    customHeightContent: 200.h,
+                    heightImage: 150.h,
+                    titleText: '',
+                    descText: message,
+                  );
+                },
                 loading: () => ShimmerWidget.custom(
                   child: GridView.builder(
                     padding: EdgeInsets.zero,

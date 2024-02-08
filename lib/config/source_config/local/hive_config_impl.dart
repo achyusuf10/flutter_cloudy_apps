@@ -35,26 +35,46 @@ class HiveConfigImpl extends HiveConfig {
 
   @override
   Future<void> delete(String key) async {
-    await _encryptedBox.delete(key);
+    try {
+      await _encryptedBox.delete(key);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<void> deleteAll(List<String> keys) async {
-    await _encryptedBox.deleteAll(keys);
+    try {
+      await _encryptedBox.deleteAll(keys);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<T?> get<T>({required String key}) async {
-    return await _encryptedBox.get(key) as T?;
+    try {
+      return await _encryptedBox.get(key) as T?;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<void> reset() async {
-    await _encryptedBox.clear();
+    try {
+      await _encryptedBox.clear();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
   Future<void> set<T>({required String key, required T data}) async {
-    await _encryptedBox.put(key, data);
+    try {
+      await _encryptedBox.put(key, data);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

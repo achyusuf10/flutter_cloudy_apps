@@ -21,6 +21,7 @@ mixin _$HomeEvent {
     required TResult Function() started,
     required TResult Function(int index) onDaySelected,
     required TResult Function() onRefresh,
+    required TResult Function() onTapSelectCity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$HomeEvent {
     TResult? Function()? started,
     TResult? Function(int index)? onDaySelected,
     TResult? Function()? onRefresh,
+    TResult? Function()? onTapSelectCity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$HomeEvent {
     TResult Function()? started,
     TResult Function(int index)? onDaySelected,
     TResult Function()? onRefresh,
+    TResult Function()? onTapSelectCity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$HomeEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_OnDaySelected value) onDaySelected,
     required TResult Function(_OnRefresh value) onRefresh,
+    required TResult Function(_OnTapSelectCity value) onTapSelectCity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$HomeEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_OnDaySelected value)? onDaySelected,
     TResult? Function(_OnRefresh value)? onRefresh,
+    TResult? Function(_OnTapSelectCity value)? onTapSelectCity,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$HomeEvent {
     TResult Function(_Started value)? started,
     TResult Function(_OnDaySelected value)? onDaySelected,
     TResult Function(_OnRefresh value)? onRefresh,
+    TResult Function(_OnTapSelectCity value)? onTapSelectCity,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function(int index) onDaySelected,
     required TResult Function() onRefresh,
+    required TResult Function() onTapSelectCity,
   }) {
     return started();
   }
@@ -130,6 +137,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(int index)? onDaySelected,
     TResult? Function()? onRefresh,
+    TResult? Function()? onTapSelectCity,
   }) {
     return started?.call();
   }
@@ -140,6 +148,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(int index)? onDaySelected,
     TResult Function()? onRefresh,
+    TResult Function()? onTapSelectCity,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -154,6 +163,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_OnDaySelected value) onDaySelected,
     required TResult Function(_OnRefresh value) onRefresh,
+    required TResult Function(_OnTapSelectCity value) onTapSelectCity,
   }) {
     return started(this);
   }
@@ -164,6 +174,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_OnDaySelected value)? onDaySelected,
     TResult? Function(_OnRefresh value)? onRefresh,
+    TResult? Function(_OnTapSelectCity value)? onTapSelectCity,
   }) {
     return started?.call(this);
   }
@@ -174,6 +185,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_OnDaySelected value)? onDaySelected,
     TResult Function(_OnRefresh value)? onRefresh,
+    TResult Function(_OnTapSelectCity value)? onTapSelectCity,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -254,6 +266,7 @@ class _$OnDaySelectedImpl implements _OnDaySelected {
     required TResult Function() started,
     required TResult Function(int index) onDaySelected,
     required TResult Function() onRefresh,
+    required TResult Function() onTapSelectCity,
   }) {
     return onDaySelected(index);
   }
@@ -264,6 +277,7 @@ class _$OnDaySelectedImpl implements _OnDaySelected {
     TResult? Function()? started,
     TResult? Function(int index)? onDaySelected,
     TResult? Function()? onRefresh,
+    TResult? Function()? onTapSelectCity,
   }) {
     return onDaySelected?.call(index);
   }
@@ -274,6 +288,7 @@ class _$OnDaySelectedImpl implements _OnDaySelected {
     TResult Function()? started,
     TResult Function(int index)? onDaySelected,
     TResult Function()? onRefresh,
+    TResult Function()? onTapSelectCity,
     required TResult orElse(),
   }) {
     if (onDaySelected != null) {
@@ -288,6 +303,7 @@ class _$OnDaySelectedImpl implements _OnDaySelected {
     required TResult Function(_Started value) started,
     required TResult Function(_OnDaySelected value) onDaySelected,
     required TResult Function(_OnRefresh value) onRefresh,
+    required TResult Function(_OnTapSelectCity value) onTapSelectCity,
   }) {
     return onDaySelected(this);
   }
@@ -298,6 +314,7 @@ class _$OnDaySelectedImpl implements _OnDaySelected {
     TResult? Function(_Started value)? started,
     TResult? Function(_OnDaySelected value)? onDaySelected,
     TResult? Function(_OnRefresh value)? onRefresh,
+    TResult? Function(_OnTapSelectCity value)? onTapSelectCity,
   }) {
     return onDaySelected?.call(this);
   }
@@ -308,6 +325,7 @@ class _$OnDaySelectedImpl implements _OnDaySelected {
     TResult Function(_Started value)? started,
     TResult Function(_OnDaySelected value)? onDaySelected,
     TResult Function(_OnRefresh value)? onRefresh,
+    TResult Function(_OnTapSelectCity value)? onTapSelectCity,
     required TResult orElse(),
   }) {
     if (onDaySelected != null) {
@@ -367,6 +385,7 @@ class _$OnRefreshImpl implements _OnRefresh {
     required TResult Function() started,
     required TResult Function(int index) onDaySelected,
     required TResult Function() onRefresh,
+    required TResult Function() onTapSelectCity,
   }) {
     return onRefresh();
   }
@@ -377,6 +396,7 @@ class _$OnRefreshImpl implements _OnRefresh {
     TResult? Function()? started,
     TResult? Function(int index)? onDaySelected,
     TResult? Function()? onRefresh,
+    TResult? Function()? onTapSelectCity,
   }) {
     return onRefresh?.call();
   }
@@ -387,6 +407,7 @@ class _$OnRefreshImpl implements _OnRefresh {
     TResult Function()? started,
     TResult Function(int index)? onDaySelected,
     TResult Function()? onRefresh,
+    TResult Function()? onTapSelectCity,
     required TResult orElse(),
   }) {
     if (onRefresh != null) {
@@ -401,6 +422,7 @@ class _$OnRefreshImpl implements _OnRefresh {
     required TResult Function(_Started value) started,
     required TResult Function(_OnDaySelected value) onDaySelected,
     required TResult Function(_OnRefresh value) onRefresh,
+    required TResult Function(_OnTapSelectCity value) onTapSelectCity,
   }) {
     return onRefresh(this);
   }
@@ -411,6 +433,7 @@ class _$OnRefreshImpl implements _OnRefresh {
     TResult? Function(_Started value)? started,
     TResult? Function(_OnDaySelected value)? onDaySelected,
     TResult? Function(_OnRefresh value)? onRefresh,
+    TResult? Function(_OnTapSelectCity value)? onTapSelectCity,
   }) {
     return onRefresh?.call(this);
   }
@@ -421,6 +444,7 @@ class _$OnRefreshImpl implements _OnRefresh {
     TResult Function(_Started value)? started,
     TResult Function(_OnDaySelected value)? onDaySelected,
     TResult Function(_OnRefresh value)? onRefresh,
+    TResult Function(_OnTapSelectCity value)? onTapSelectCity,
     required TResult orElse(),
   }) {
     if (onRefresh != null) {
@@ -435,11 +459,125 @@ abstract class _OnRefresh implements HomeEvent {
 }
 
 /// @nodoc
+abstract class _$$OnTapSelectCityImplCopyWith<$Res> {
+  factory _$$OnTapSelectCityImplCopyWith(_$OnTapSelectCityImpl value,
+          $Res Function(_$OnTapSelectCityImpl) then) =
+      __$$OnTapSelectCityImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OnTapSelectCityImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$OnTapSelectCityImpl>
+    implements _$$OnTapSelectCityImplCopyWith<$Res> {
+  __$$OnTapSelectCityImplCopyWithImpl(
+      _$OnTapSelectCityImpl _value, $Res Function(_$OnTapSelectCityImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$OnTapSelectCityImpl implements _OnTapSelectCity {
+  const _$OnTapSelectCityImpl();
+
+  @override
+  String toString() {
+    return 'HomeEvent.onTapSelectCity()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OnTapSelectCityImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(int index) onDaySelected,
+    required TResult Function() onRefresh,
+    required TResult Function() onTapSelectCity,
+  }) {
+    return onTapSelectCity();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(int index)? onDaySelected,
+    TResult? Function()? onRefresh,
+    TResult? Function()? onTapSelectCity,
+  }) {
+    return onTapSelectCity?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(int index)? onDaySelected,
+    TResult Function()? onRefresh,
+    TResult Function()? onTapSelectCity,
+    required TResult orElse(),
+  }) {
+    if (onTapSelectCity != null) {
+      return onTapSelectCity();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_OnDaySelected value) onDaySelected,
+    required TResult Function(_OnRefresh value) onRefresh,
+    required TResult Function(_OnTapSelectCity value) onTapSelectCity,
+  }) {
+    return onTapSelectCity(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_OnDaySelected value)? onDaySelected,
+    TResult? Function(_OnRefresh value)? onRefresh,
+    TResult? Function(_OnTapSelectCity value)? onTapSelectCity,
+  }) {
+    return onTapSelectCity?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_OnDaySelected value)? onDaySelected,
+    TResult Function(_OnRefresh value)? onRefresh,
+    TResult Function(_OnTapSelectCity value)? onTapSelectCity,
+    required TResult orElse(),
+  }) {
+    if (onTapSelectCity != null) {
+      return onTapSelectCity(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _OnTapSelectCity implements HomeEvent {
+  const factory _OnTapSelectCity() = _$OnTapSelectCityImpl;
+}
+
+/// @nodoc
 mixin _$HomeState {
   int get selectedIndexDay => throw _privateConstructorUsedError;
-  UIState<ForecastWeatherEntity> get selectedWeatherCondition =>
+  UIState<WeatherEntity> get selectedWeatherCondition =>
       throw _privateConstructorUsedError;
-  UIState<ForecastWeatherEntity> get currentWeatherCondition =>
+  UIState<WeatherEntity> get currentWeatherCondition =>
       throw _privateConstructorUsedError;
   UIState<LocationResultEntity> get selectedLocation =>
       throw _privateConstructorUsedError;
@@ -456,12 +594,12 @@ abstract class $HomeStateCopyWith<$Res> {
   @useResult
   $Res call(
       {int selectedIndexDay,
-      UIState<ForecastWeatherEntity> selectedWeatherCondition,
-      UIState<ForecastWeatherEntity> currentWeatherCondition,
+      UIState<WeatherEntity> selectedWeatherCondition,
+      UIState<WeatherEntity> currentWeatherCondition,
       UIState<LocationResultEntity> selectedLocation});
 
-  $UIStateCopyWith<ForecastWeatherEntity, $Res> get selectedWeatherCondition;
-  $UIStateCopyWith<ForecastWeatherEntity, $Res> get currentWeatherCondition;
+  $UIStateCopyWith<WeatherEntity, $Res> get selectedWeatherCondition;
+  $UIStateCopyWith<WeatherEntity, $Res> get currentWeatherCondition;
   $UIStateCopyWith<LocationResultEntity, $Res> get selectedLocation;
 }
 
@@ -491,11 +629,11 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       selectedWeatherCondition: null == selectedWeatherCondition
           ? _value.selectedWeatherCondition
           : selectedWeatherCondition // ignore: cast_nullable_to_non_nullable
-              as UIState<ForecastWeatherEntity>,
+              as UIState<WeatherEntity>,
       currentWeatherCondition: null == currentWeatherCondition
           ? _value.currentWeatherCondition
           : currentWeatherCondition // ignore: cast_nullable_to_non_nullable
-              as UIState<ForecastWeatherEntity>,
+              as UIState<WeatherEntity>,
       selectedLocation: null == selectedLocation
           ? _value.selectedLocation
           : selectedLocation // ignore: cast_nullable_to_non_nullable
@@ -505,8 +643,8 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
 
   @override
   @pragma('vm:prefer-inline')
-  $UIStateCopyWith<ForecastWeatherEntity, $Res> get selectedWeatherCondition {
-    return $UIStateCopyWith<ForecastWeatherEntity, $Res>(
+  $UIStateCopyWith<WeatherEntity, $Res> get selectedWeatherCondition {
+    return $UIStateCopyWith<WeatherEntity, $Res>(
         _value.selectedWeatherCondition, (value) {
       return _then(_value.copyWith(selectedWeatherCondition: value) as $Val);
     });
@@ -514,9 +652,9 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
 
   @override
   @pragma('vm:prefer-inline')
-  $UIStateCopyWith<ForecastWeatherEntity, $Res> get currentWeatherCondition {
-    return $UIStateCopyWith<ForecastWeatherEntity, $Res>(
-        _value.currentWeatherCondition, (value) {
+  $UIStateCopyWith<WeatherEntity, $Res> get currentWeatherCondition {
+    return $UIStateCopyWith<WeatherEntity, $Res>(_value.currentWeatherCondition,
+        (value) {
       return _then(_value.copyWith(currentWeatherCondition: value) as $Val);
     });
   }
@@ -541,14 +679,14 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {int selectedIndexDay,
-      UIState<ForecastWeatherEntity> selectedWeatherCondition,
-      UIState<ForecastWeatherEntity> currentWeatherCondition,
+      UIState<WeatherEntity> selectedWeatherCondition,
+      UIState<WeatherEntity> currentWeatherCondition,
       UIState<LocationResultEntity> selectedLocation});
 
   @override
-  $UIStateCopyWith<ForecastWeatherEntity, $Res> get selectedWeatherCondition;
+  $UIStateCopyWith<WeatherEntity, $Res> get selectedWeatherCondition;
   @override
-  $UIStateCopyWith<ForecastWeatherEntity, $Res> get currentWeatherCondition;
+  $UIStateCopyWith<WeatherEntity, $Res> get currentWeatherCondition;
   @override
   $UIStateCopyWith<LocationResultEntity, $Res> get selectedLocation;
 }
@@ -577,11 +715,11 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       selectedWeatherCondition: null == selectedWeatherCondition
           ? _value.selectedWeatherCondition
           : selectedWeatherCondition // ignore: cast_nullable_to_non_nullable
-              as UIState<ForecastWeatherEntity>,
+              as UIState<WeatherEntity>,
       currentWeatherCondition: null == currentWeatherCondition
           ? _value.currentWeatherCondition
           : currentWeatherCondition // ignore: cast_nullable_to_non_nullable
-              as UIState<ForecastWeatherEntity>,
+              as UIState<WeatherEntity>,
       selectedLocation: null == selectedLocation
           ? _value.selectedLocation
           : selectedLocation // ignore: cast_nullable_to_non_nullable
@@ -595,10 +733,8 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {this.selectedIndexDay = 1,
-      this.selectedWeatherCondition =
-          const UIState<ForecastWeatherEntity>.idle(),
-      this.currentWeatherCondition =
-          const UIState<ForecastWeatherEntity>.idle(),
+      this.selectedWeatherCondition = const UIState<WeatherEntity>.idle(),
+      this.currentWeatherCondition = const UIState<WeatherEntity>.idle(),
       this.selectedLocation = const UIState<LocationResultEntity>.idle()});
 
   @override
@@ -606,10 +742,10 @@ class _$HomeStateImpl implements _HomeState {
   final int selectedIndexDay;
   @override
   @JsonKey()
-  final UIState<ForecastWeatherEntity> selectedWeatherCondition;
+  final UIState<WeatherEntity> selectedWeatherCondition;
   @override
   @JsonKey()
-  final UIState<ForecastWeatherEntity> currentWeatherCondition;
+  final UIState<WeatherEntity> currentWeatherCondition;
   @override
   @JsonKey()
   final UIState<LocationResultEntity> selectedLocation;
@@ -650,16 +786,16 @@ class _$HomeStateImpl implements _HomeState {
 abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {final int selectedIndexDay,
-      final UIState<ForecastWeatherEntity> selectedWeatherCondition,
-      final UIState<ForecastWeatherEntity> currentWeatherCondition,
+      final UIState<WeatherEntity> selectedWeatherCondition,
+      final UIState<WeatherEntity> currentWeatherCondition,
       final UIState<LocationResultEntity> selectedLocation}) = _$HomeStateImpl;
 
   @override
   int get selectedIndexDay;
   @override
-  UIState<ForecastWeatherEntity> get selectedWeatherCondition;
+  UIState<WeatherEntity> get selectedWeatherCondition;
   @override
-  UIState<ForecastWeatherEntity> get currentWeatherCondition;
+  UIState<WeatherEntity> get currentWeatherCondition;
   @override
   UIState<LocationResultEntity> get selectedLocation;
   @override

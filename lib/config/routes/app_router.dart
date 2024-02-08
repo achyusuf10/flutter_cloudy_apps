@@ -3,7 +3,6 @@ import 'package:cloudy/app/features/home/presentation/pages/home_page.dart';
 import 'package:cloudy/app/features/pick_location/presentation/pages/pick_location_page.dart';
 import 'package:cloudy/app/features/select_city/presentation/pages/select_city_page.dart';
 import 'package:cloudy/app/features/splash/presentation/pages/splash_page.dart';
-import 'package:cloudy/app/global_entity/location_result_entity.dart';
 import 'package:cloudy/config/routes/routes.dart';
 import 'package:injectable/injectable.dart';
 

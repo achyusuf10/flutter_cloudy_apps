@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
 import 'package:cloudy/app/features/select_city/presentation/blocs/select_city/select_city_cubit.dart';
+import 'package:cloudy/app/features/select_city/presentation/widgets/card_city_widget.dart';
+import 'package:cloudy/app/features/select_city/presentation/widgets/card_location_widget.dart';
+import 'package:cloudy/app/features/select_city/presentation/widgets/search_text_widget.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
+import 'package:cloudy/app/widgets/general_empty_widget.dart';
 import 'package:cloudy/app/widgets/shimmer_widget.dart';
 import 'package:cloudy/config/themes/app_colors.dart';
-import 'package:cloudy/config/themes/app_gradient.dart';
 import 'package:cloudy/core/state/ui_state.dart';
 import 'package:cloudy/utils/functions/get_controller_func.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +27,9 @@ class _SelectCityPageState extends State<SelectCityPage> {
 
   @override
   void initState() {
-    _selectCityCubit = GetControllerFunc.call<SelectCityCubit>();
+    _selectCityCubit = GetControllerFunc.call<SelectCityCubit>(
+      reset: true,
+    );
     super.initState();
   }
 
@@ -57,58 +62,10 @@ class _SelectCityPageState extends State<SelectCityPage> {
         body: Column(
           children: [
             12.verticalSpace,
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: 16.w,
-              ),
-              padding: EdgeInsets.symmetric(
-                vertical: 14.h,
-                horizontal: 10.w,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.gray50,
-                borderRadius: BorderRadius.circular(
-                  10.r,
-                ),
-              ),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.search,
-                    color: AppColors.gray500,
-                  ),
-                  7.horizontalSpace,
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        isDense: true,
-                        hintText: 'Search city',
-                        hintStyle: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.gray300,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  7.horizontalSpace,
-                  IconButton(
-                    constraints: const BoxConstraints(),
-                    style: const ButtonStyle(
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    padding: EdgeInsets.zero,
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.map_outlined,
-                      color: AppColors.gray500,
-                    ),
-                  ),
-                ],
-              ),
+            SearchTextWidget(
+              hintText: 'Search City',
+              onSubmit: _selectCityCubit.onSubmitQuery,
+              onChange: _selectCityCubit.onChangeTextField,
             ),
             14.verticalSpace,
             Expanded(
@@ -118,14 +75,42 @@ class _SelectCityPageState extends State<SelectCityPage> {
                 builder: (context, stateData) {
                   return stateData.when(
                     success: (listDataLocation) {
-                      return const SizedBox();
+                      return ListView.separated(
+                        primary: true,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                        ),
+                        itemBuilder: (context, index) {
+                          var itemLocation = listDataLocation[index];
+                          return CardLocationWidget(
+                            itemLocation: itemLocation,
+                            onTap: _selectCityCubit.onTapLocation,
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return 10.verticalSpace;
+                        },
+                        itemCount: listDataLocation.length,
+                      );
                     },
-                    empty: (message) => const SizedBox(),
+                    empty: (message) => GeneralEmptyErrorWidget(
+                      customHeightContent: 200.h,
+                      heightImage: 150.h,
+                      titleText: 'City Not Found',
+                      descText: message,
+                    ),
                     loading: () => const ShimmerWidget.list(
                       length: 4,
                     ),
-                    error: (message) => const SizedBox(),
+                    error: (message) => GeneralEmptyErrorWidget(
+                      customHeightContent: 200.h,
+                      heightImage: 150.h,
+                      titleText: 'Error City Not Found',
+                      descText: message,
+                    ),
                     idle: () {
+                      /// * Tampilan awal belum search
                       return BlocSelector<SelectCityCubit, SelectCityState,
                           UIState<List<CityEntity>>>(
                         selector: (state) => state.stateDataCity,
@@ -141,6 +126,9 @@ class _SelectCityPageState extends State<SelectCityPage> {
                                 itemBuilder: (context, index) {
                                   var itemCity = listDataCity[index];
                                   return CardCityWidget(
+                                    onTap: (city) {
+                                      _selectCityCubit.onTapCity(city);
+                                    },
                                     itemCity: itemCity,
                                   );
                                 },
@@ -159,71 +147,6 @@ class _SelectCityPageState extends State<SelectCityPage> {
                 },
               ),
             )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CardCityWidget extends StatelessWidget {
-  const CardCityWidget({
-    super.key,
-    required this.itemCity,
-    this.onTap,
-  });
-
-  final CityEntity itemCity;
-  final Function()? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 18.w,
-          vertical: 16.h,
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.r),
-          gradient: AppGradient.primaryGradient,
-        ),
-        child: Row(
-          children: [
-            Icon(
-              Icons.location_on,
-              color: Colors.white,
-              size: 24.h,
-            ),
-            8.horizontalSpace,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    itemCity.name,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    '${itemCity.regionName} ${itemCity.countryName}',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Image.asset(
-              itemCity.currentForecast.conditionByCurrentHours.imagePath,
-              height: 40.h,
-            ),
           ],
         ),
       ),

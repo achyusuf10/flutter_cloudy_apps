@@ -39,6 +39,30 @@ class ResForecastWeather {
         "forecast": forecast?.toJson(),
         "alerts": alerts?.toJson(),
       };
+
+  @override
+  String toString() {
+    return 'ResForecastWeather(location: $location, current: $current, forecast: $forecast, alerts: $alerts)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ResForecastWeather &&
+        other.location == location &&
+        other.current == current &&
+        other.forecast == forecast &&
+        other.alerts == alerts;
+  }
+
+  @override
+  int get hashCode {
+    return location.hashCode ^
+        current.hashCode ^
+        forecast.hashCode ^
+        alerts.hashCode;
+  }
 }
 
 class _Alerts {
@@ -57,30 +81,32 @@ class _Alerts {
   Map<String, dynamic> toJson() => {
         "alert": alert == null ? [] : List<dynamic>.from(alert!.map((x) => x)),
       };
+
+  @override
+  String toString() => '_Alerts(alert: $alert)';
 }
 
 class _Current {
   final int? lastUpdatedEpoch;
   final String? lastUpdated;
-  final int? tempC;
-  final int? tempF;
+  final double? tempC;
+  final double? tempF;
   final int? isDay;
   final _Condition? condition;
   final double? windMph;
-  final int? windKph;
+  final double? windKph;
   final int? windDegree;
-  final _WindDir? windDir;
-  final int? pressureMb;
+  final double? pressureMb;
   final double? pressureIn;
-  final int? precipMm;
-  final int? precipIn;
+  final double? precipMm;
+  final double? precipIn;
   final int? humidity;
   final int? cloud;
   final double? feelslikeC;
   final double? feelslikeF;
-  final int? visKm;
-  final int? visMiles;
-  final int? uv;
+  final double? visKm;
+  final double? visMiles;
+  final double? uv;
   final double? gustMph;
   final double? gustKph;
 
@@ -94,7 +120,6 @@ class _Current {
     this.windMph,
     this.windKph,
     this.windDegree,
-    this.windDir,
     this.pressureMb,
     this.pressureIn,
     this.precipMm,
@@ -122,7 +147,6 @@ class _Current {
         windMph: json["wind_mph"]?.toDouble(),
         windKph: json["wind_kph"],
         windDegree: json["wind_degree"],
-        windDir: windDirValues.map[json["wind_dir"]]!,
         pressureMb: json["pressure_mb"],
         pressureIn: json["pressure_in"]?.toDouble(),
         precipMm: json["precip_mm"],
@@ -148,7 +172,6 @@ class _Current {
         "wind_mph": windMph,
         "wind_kph": windKph,
         "wind_degree": windDegree,
-        "wind_dir": windDirValues.reverse[windDir],
         "pressure_mb": pressureMb,
         "pressure_in": pressureIn,
         "precip_mm": precipMm,
@@ -163,6 +186,11 @@ class _Current {
         "gust_mph": gustMph,
         "gust_kph": gustKph,
       };
+
+  @override
+  String toString() {
+    return '_Current(lastUpdatedEpoch: $lastUpdatedEpoch, lastUpdated: $lastUpdated, tempC: $tempC, tempF: $tempF, isDay: $isDay, condition: $condition, windMph: $windMph, windKph: $windKph, windDegree: $windDegree, pressureMb: $pressureMb, pressureIn: $pressureIn, precipMm: $precipMm, precipIn: $precipIn, humidity: $humidity, cloud: $cloud, feelslikeC: $feelslikeC, feelslikeF: $feelslikeF, visKm: $visKm, visMiles: $visMiles, uv: $uv, gustMph: $gustMph, gustKph: $gustKph)';
+  }
 }
 
 class _Condition {
@@ -187,22 +215,10 @@ class _Condition {
         "icon": icon,
         "code": code,
       };
+
+  @override
+  String toString() => '_Condition(text: $text, icon: $icon, code: $code)';
 }
-
-enum _WindDir { E, ESE, S, SE, SSE, SSW, SW, W, WNW, WSW }
-
-final windDirValues = _EnumValues({
-  "E": _WindDir.E,
-  "ESE": _WindDir.ESE,
-  "S": _WindDir.S,
-  "SE": _WindDir.SE,
-  "SSE": _WindDir.SSE,
-  "SSW": _WindDir.SSW,
-  "SW": _WindDir.SW,
-  "W": _WindDir.W,
-  "WNW": _WindDir.WNW,
-  "WSW": _WindDir.WSW
-});
 
 class _Forecast {
   final List<_Forecastday>? forecastday;
@@ -223,6 +239,9 @@ class _Forecast {
             ? []
             : List<dynamic>.from(forecastday!.map((x) => x.toJson())),
       };
+
+  @override
+  String toString() => '_Forecast(forecastday: $forecastday)';
 }
 
 class _Forecastday {
@@ -264,6 +283,11 @@ class _Forecastday {
             ? []
             : List<dynamic>.from(hour!.map((x) => x.toJson())),
       };
+
+  @override
+  String toString() {
+    return '_Forecastday(date: $date, dateEpoch: $dateEpoch, day: $day, astro: $astro, hour: $hour)';
+  }
 }
 
 class _Astro {
@@ -308,6 +332,11 @@ class _Astro {
         "is_moon_up": isMoonUp,
         "is_sun_up": isSunUp,
       };
+
+  @override
+  String toString() {
+    return '_Astro(sunrise: $sunrise, sunset: $sunset, moonrise: $moonrise, moonset: $moonset, moonPhase: $moonPhase, moonIllumination: $moonIllumination, isMoonUp: $isMoonUp, isSunUp: $isSunUp)';
+  }
 }
 
 class _Day {
@@ -321,16 +350,16 @@ class _Day {
   final double? maxwindKph;
   final double? totalprecipMm;
   final double? totalprecipIn;
-  final int? totalsnowCm;
+  final double? totalsnowCm;
   final double? avgvisKm;
-  final int? avgvisMiles;
+  final double? avgvisMiles;
   final int? avghumidity;
   final int? dailyWillItRain;
   final int? dailyChanceOfRain;
   final int? dailyWillItSnow;
   final int? dailyChanceOfSnow;
   final _Condition? condition;
-  final int? uv;
+  final double? uv;
 
   _Day({
     this.maxtempC,
@@ -402,6 +431,11 @@ class _Day {
         "condition": condition?.toJson(),
         "uv": uv,
       };
+
+  @override
+  String toString() {
+    return '_Day(maxtempC: $maxtempC, maxtempF: $maxtempF, mintempC: $mintempC, mintempF: $mintempF, avgtempC: $avgtempC, avgtempF: $avgtempF, maxwindMph: $maxwindMph, maxwindKph: $maxwindKph, totalprecipMm: $totalprecipMm, totalprecipIn: $totalprecipIn, totalsnowCm: $totalsnowCm, avgvisKm: $avgvisKm, avgvisMiles: $avgvisMiles, avghumidity: $avghumidity, dailyWillItRain: $dailyWillItRain, dailyChanceOfRain: $dailyChanceOfRain, dailyWillItSnow: $dailyWillItSnow, dailyChanceOfSnow: $dailyChanceOfSnow, condition: $condition, uv: $uv)';
+  }
 }
 
 class _Hour {
@@ -414,12 +448,11 @@ class _Hour {
   final double? windMph;
   final double? windKph;
   final int? windDegree;
-  final _WindDir? windDir;
-  final int? pressureMb;
+  final double? pressureMb;
   final double? pressureIn;
   final double? precipMm;
   final double? precipIn;
-  final int? snowCm;
+  final double? snowCm;
   final int? humidity;
   final int? cloud;
   final double? feelslikeC;
@@ -434,11 +467,11 @@ class _Hour {
   final int? chanceOfRain;
   final int? willItSnow;
   final int? chanceOfSnow;
-  final int? visKm;
-  final int? visMiles;
+  final double? visKm;
+  final double? visMiles;
   final double? gustMph;
   final double? gustKph;
-  final int? uv;
+  final double? uv;
   final double? shortRad;
   final double? diffRad;
 
@@ -452,7 +485,6 @@ class _Hour {
     this.windMph,
     this.windKph,
     this.windDegree,
-    this.windDir,
     this.pressureMb,
     this.pressureIn,
     this.precipMm,
@@ -493,7 +525,6 @@ class _Hour {
         windMph: json["wind_mph"]?.toDouble(),
         windKph: json["wind_kph"]?.toDouble(),
         windDegree: json["wind_degree"],
-        windDir: windDirValues.map[json["wind_dir"]]!,
         pressureMb: json["pressure_mb"],
         pressureIn: json["pressure_in"]?.toDouble(),
         precipMm: json["precip_mm"]?.toDouble(),
@@ -532,7 +563,6 @@ class _Hour {
         "wind_mph": windMph,
         "wind_kph": windKph,
         "wind_degree": windDegree,
-        "wind_dir": windDirValues.reverse[windDir],
         "pressure_mb": pressureMb,
         "pressure_in": pressureIn,
         "precip_mm": precipMm,
@@ -560,6 +590,11 @@ class _Hour {
         "short_rad": shortRad,
         "diff_rad": diffRad,
       };
+
+  @override
+  String toString() {
+    return '_Hour(timeEpoch: $timeEpoch, time: $time, tempC: $tempC, tempF: $tempF, isDay: $isDay, condition: $condition, windMph: $windMph, windKph: $windKph, windDegree: $windDegree,  pressureMb: $pressureMb, pressureIn: $pressureIn, precipMm: $precipMm, precipIn: $precipIn, snowCm: $snowCm, humidity: $humidity, cloud: $cloud, feelslikeC: $feelslikeC, feelslikeF: $feelslikeF, windchillC: $windchillC, windchillF: $windchillF, heatindexC: $heatindexC, heatindexF: $heatindexF, dewpointC: $dewpointC, dewpointF: $dewpointF, willItRain: $willItRain, chanceOfRain: $chanceOfRain, willItSnow: $willItSnow, chanceOfSnow: $chanceOfSnow, visKm: $visKm, visMiles: $visMiles, gustMph: $gustMph, gustKph: $gustKph, uv: $uv, shortRad: $shortRad, diffRad: $diffRad)';
+  }
 }
 
 class _Location {
@@ -604,16 +639,9 @@ class _Location {
         "localtime_epoch": localtimeEpoch,
         "localtime": localtime,
       };
-}
 
-class _EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  _EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
+  @override
+  String toString() {
+    return '_Location(name: $name, region: $region, country: $country, lat: $lat, lon: $lon, tzId: $tzId, localtimeEpoch: $localtimeEpoch, localtime: $localtime)';
   }
 }

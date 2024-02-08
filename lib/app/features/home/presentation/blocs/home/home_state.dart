@@ -4,10 +4,10 @@ part of 'home_bloc.dart';
 class HomeState with _$HomeState {
   const factory HomeState({
     @Default(1) int selectedIndexDay,
-    @Default(UIState<ForecastWeatherEntity>.idle())
-    UIState<ForecastWeatherEntity> selectedWeatherCondition,
-    @Default(UIState<ForecastWeatherEntity>.idle())
-    UIState<ForecastWeatherEntity> currentWeatherCondition,
+    @Default(UIState<WeatherEntity>.idle())
+    UIState<WeatherEntity> selectedWeatherCondition,
+    @Default(UIState<WeatherEntity>.idle())
+    UIState<WeatherEntity> currentWeatherCondition,
     @Default(UIState<LocationResultEntity>.idle())
     UIState<LocationResultEntity> selectedLocation,
   }) = _HomeState;

@@ -18,7 +18,7 @@ void main() {
           // act
           final result = ResForecastWeather.fromJson(jsonMap);
           // assert
-          expect(result.runtimeType, ResForecastWeather);
+          expect(result, isA<ResForecastWeather>());
         },
       );
 

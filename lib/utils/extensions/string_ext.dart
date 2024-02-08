@@ -82,17 +82,13 @@ extension StringExtension on String {
   /// The [originFormatDate] parameter specifies the format of the string representation of the date.
   /// The default value is 'yyyy-MM-dd'.
   ///
-  /// The [locale] parameter specifies the locale to be used for parsing the date.
-  /// The default value is 'EN' (Indonesian locale).
-  ///
   /// Returns the parsed DateTime object.
   /// If the string cannot be parsed, returns the current DateTime.
   DateTime extToDateTime({
     String originFormatDate = 'yyyy-MM-dd',
-    String locale = 'EN',
   }) {
     try {
-      var res = DateFormat(originFormatDate, locale).parse(this);
+      var res = DateFormat(originFormatDate).parse(this);
       return res;
     } catch (e) {
       var res = DateTime.tryParse(this);
@@ -107,17 +103,13 @@ extension StringExtension on String {
   ///
   /// The [originFormatDate] parameter specifies the original format of the date string that will be converted. The default value is 'yyyy-MM-dd'.
   ///
-  /// The [originLocale] parameter specifies the locale of the original date string. The default value is 'EN'.
-  ///
   /// Example usage: "09-01-2000".extToCustomFormattedDate(formatDateString: 'dd-MM-yyyy')
   String extToCustomFormattedDate({
     String outputDateFormat = 'dd-MM-yyyy',
     String originFormatDate = 'yyyy-MM-dd',
-    String originLocale = 'EN',
   }) {
     DateTime temp = extToDateTime(
       originFormatDate: originFormatDate,
-      locale: originLocale,
     );
     return temp.extToFormattedString(outputDateFormat: outputDateFormat);
   }

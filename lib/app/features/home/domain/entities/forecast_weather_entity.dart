@@ -1,52 +1,63 @@
-import 'package:cloudy/constants/core/image_assets_const.dart';
+import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart';
 
 class ForecastWeatherEntity {
-  final DateTime date;
-  final List<WeatherItemByHoursEntity> listItem;
+  final List<WeatherEntity> datas;
 
   ForecastWeatherEntity({
-    required this.date,
-    required this.listItem,
+    required this.datas,
   });
 
-  WeatherItemByHoursEntity get conditionByCurrentHours {
-    return listItem.firstWhere(
-      (element) => (DateTime.now().hour == element.time.hour),
-      orElse: () => WeatherItemByHoursEntity(
-        time: DateTime.now(),
-        condition: 'cloudy',
-        temperature: 10,
-        windPressure: 20,
-        uvIndex: 30,
-        humidity: 30,
-      ),
+  WeatherEntity? get currentWeather {
+    try {
+      return datas.firstWhere(
+        (element) => element.date.day == DateTime.now().day,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  WeatherEntity? get yesterdayWeather {
+    try {
+      return datas.firstWhere(
+        (element) => element.date.day == DateTime.now().day - 1,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  WeatherEntity? get tommorowWeather {
+    try {
+      return datas.firstWhere(
+        (element) => element.date.day == DateTime.now().day + 1,
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  String toString() => 'ForecastWeatherEntity(datas: $datas)';
+
+  ForecastWeatherEntity copyWith({
+    List<WeatherEntity>? datas,
+  }) {
+    return ForecastWeatherEntity(
+      datas: datas ?? this.datas,
     );
   }
 
-  factory ForecastWeatherEntity.initial() => ForecastWeatherEntity(
-        date: DateTime.now(),
-        listItem: [],
-      );
-}
+  Map<String, dynamic> toJson() {
+    return {
+      'datas': datas.map((x) => x.toJson()).toList(),
+    };
+  }
 
-class WeatherItemByHoursEntity {
-  final DateTime time;
-  final String condition;
-  final double temperature;
-  final double windPressure;
-  final double uvIndex;
-  final double humidity;
-
-  WeatherItemByHoursEntity({
-    required this.time,
-    required this.condition,
-    required this.temperature,
-    required this.windPressure,
-    required this.uvIndex,
-    required this.humidity,
-  });
-
-  String get imagePath => switch (condition) {
-        _ => ImageAssetsConst.icCloudy,
-      };
+  factory ForecastWeatherEntity.fromJson(Map<String, dynamic> map) {
+    return ForecastWeatherEntity(
+      datas: List<WeatherEntity>.from(
+          map['datas']?.map((x) => WeatherEntity.fromJson(x))),
+    );
+  }
 }

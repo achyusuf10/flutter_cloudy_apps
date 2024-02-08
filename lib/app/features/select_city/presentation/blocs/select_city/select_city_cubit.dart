@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
 import 'package:cloudy/app/features/select_city/domain/usecases/get_history_city_uc.dart';
 import 'package:cloudy/app/features/select_city/domain/usecases/get_list_city_by_query_uc.dart';
-import 'package:cloudy/app/features/select_city/domain/usecases/save_city_uc.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
 import 'package:cloudy/core/state/ui_state.dart';
+import 'package:cloudy/utils/functions/get_context_func.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,13 +14,15 @@ part 'select_city_state.dart';
 
 @lazySingleton
 class SelectCityCubit extends Cubit<SelectCityState> {
-  final SaveCityUC _saveCityUC;
   final GetHistoryCityUC _getHistoryCityUC;
   final GetListCityByQueryUC _getListCityByQueryUC;
+  final GetContextFunc _getContextFunc;
 
   SelectCityCubit(
-      this._saveCityUC, this._getHistoryCityUC, this._getListCityByQueryUC)
-      : super(const SelectCityState()) {
+    this._getHistoryCityUC,
+    this._getListCityByQueryUC,
+    this._getContextFunc,
+  ) : super(const SelectCityState()) {
     _onStarted();
   }
 
@@ -52,14 +55,16 @@ class SelectCityCubit extends Cubit<SelectCityState> {
     );
   }
 
-  Future<void> onSearchCity(String? query) async {
-    if ((query ?? '').length < 3) {
+  void onChangeTextField(String? value) {
+    if ((value ?? '').isEmpty) {
       emit(state.copyWith(
         stateDataLocation: const UIState.idle(),
       ));
       return;
     }
+  }
 
+  Future<void> onSubmitQuery(String? query) async {
     emit(state.copyWith(
       stateDataLocation: const UIState.loading(),
     ));
@@ -86,5 +91,13 @@ class SelectCityCubit extends Cubit<SelectCityState> {
         ));
       },
     );
+  }
+
+  Future<void> onTapLocation(LocationResultEntity value) async {
+    _getContextFunc.i.router.pop<LocationResultEntity>(value);
+  }
+
+  Future<void> onTapCity(CityEntity value) async {
+    _getContextFunc.i.router.pop<CityEntity>(value);
   }
 }

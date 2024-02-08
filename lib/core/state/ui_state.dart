@@ -6,11 +6,11 @@ part 'ui_state.freezed.dart';
 class UIState<T> with _$UIState<T> {
   const factory UIState.success({required T data}) = UIStateSuccess<T>;
   const factory UIState.empty({
-    @Default('Maaf, saat ini data kamu tidak tersedia') String message,
+    @Default('Sorry, your data is not available') String message,
   }) = UIStateEmpty<T>;
   const factory UIState.loading() = UIStateLoading<T>;
   const factory UIState.error({
-    @Default('Terjadi Kesalahan, Silahkan Coba Lagi') String message,
+    @Default('Upps, please try again') String message,
   }) = UIStateError<T>;
   const factory UIState.idle() = UIStateIdle<T>;
 }

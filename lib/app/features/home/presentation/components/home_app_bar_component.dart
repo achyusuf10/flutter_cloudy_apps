@@ -1,8 +1,7 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:cloudy/app/features/home/presentation/blocs/home/home_bloc.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
-import 'package:cloudy/config/routes/routes.dart';
-import 'package:cloudy/core/loggers/app_logger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeAppBarComponent extends StatelessWidget {
@@ -19,9 +18,8 @@ class HomeAppBarComponent extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () async {
-            var res = await context.router.pushNamed(Routes.selectCityPage);
-            AppLogger.logData(res.toString());
+          onTap: () {
+            context.read<HomeBloc>().add(const HomeEvent.onTapSelectCity());
           },
           child: SizedBox(
             height: AppBar().preferredSize.height,

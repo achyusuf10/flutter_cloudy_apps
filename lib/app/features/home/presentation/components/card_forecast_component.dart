@@ -1,17 +1,38 @@
 import 'package:cloudy/app/features/home/presentation/blocs/home/home_bloc.dart';
+import 'package:cloudy/app/widgets/general_empty_widget.dart';
 import 'package:cloudy/app/widgets/main_button_widget.dart';
 import 'package:cloudy/app/widgets/shimmer_widget.dart';
 import 'package:cloudy/config/themes/app_colors.dart';
+import 'package:cloudy/constants/core/lottie_assets_const.dart';
 import 'package:cloudy/utils/extensions/date_time_ext.dart';
 import 'package:cloudy/utils/extensions/iteration_ext.dart';
+import 'package:cloudy/utils/extensions/time_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CardForecastComponent extends StatelessWidget {
+class CardForecastComponent extends StatefulWidget {
   const CardForecastComponent({
     super.key,
   });
+
+  @override
+  State<CardForecastComponent> createState() => _CardForecastComponentState();
+}
+
+class _CardForecastComponentState extends State<CardForecastComponent> {
+  late ScrollController _scrollController;
+  @override
+  initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +56,29 @@ class CardForecastComponent extends StatelessWidget {
         horizontal: 16.w,
       ),
       width: double.infinity,
-      child: BlocBuilder<HomeBloc, HomeState>(
+      child: BlocConsumer<HomeBloc, HomeState>(
+        listener: (context, state) {
+          state.selectedWeatherCondition.maybeWhen(
+            success: (data) {
+              int curHours = DateTime.now().hour;
+              _scrollController.animateTo(
+                curHours * ([23, 0].contains(curHours) ? 60 : 55.w),
+                duration: const Duration(milliseconds: 600),
+                curve: Curves.bounceIn,
+              );
+            },
+            orElse: () {},
+          );
+        },
         builder: (context, state) {
           return Column(
             children: [
               Row(
-                children: ['Yesterday', 'Today', 'Tomorrow']
+                children: [
+                  'Yesterday',
+                  'Today',
+                  'Tomorrow',
+                ]
                     .extMapIndexed(
                       (data, i) => Expanded(
                         flex: i == 1 ? 22 : 17,
@@ -98,20 +136,30 @@ class CardForecastComponent extends StatelessWidget {
                         .toList(),
                   ),
                 ),
+                error: (message) {
+                  return GeneralEmptyErrorWidget(
+                    customHeightContent: 76.h,
+                    heightImage: 70.h,
+                    customUrlImage: LottieAssetsConst.animError2,
+                    titleText: '',
+                    descText: '',
+                  );
+                },
                 success: (dataBySelectedDate) {
                   return SizedBox(
                     height: 75.h,
                     width: double.infinity,
                     child: ListView.separated(
+                      controller: _scrollController,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         var data = dataBySelectedDate.listItem[index];
                         return Column(
                           children: [
                             Text(
-                              data.time.extToFormattedString(
-                                outputDateFormat: 'H a',
-                              ),
+                              data.time.extToDateTime().extToFormattedString(
+                                    outputDateFormat: 'H a',
+                                  ),
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w300,

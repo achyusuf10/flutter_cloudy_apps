@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cloudy/app/features/home/domain/entities/forecast_weather_entity.dart';
+import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart';
 import 'package:cloudy/app/features/home/presentation/blocs/home/home_bloc.dart';
 import 'package:cloudy/app/features/home/presentation/components/card_forecast_component.dart';
 import 'package:cloudy/app/features/home/presentation/components/home_app_bar_component.dart';
 import 'package:cloudy/app/features/home/presentation/components/home_detail_component.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
+import 'package:cloudy/app/widgets/general_empty_widget.dart';
 import 'package:cloudy/app/widgets/shimmer_widget.dart';
 import 'package:cloudy/config/themes/app_gradient.dart';
 import 'package:cloudy/constants/core/image_assets_const.dart';
@@ -79,10 +80,15 @@ class _HomePageState extends State<HomePage> {
                       selector: (state) => state.selectedLocation,
                       builder: (context, state) {
                         return state.maybeWhen(
-                          loading: () => ShimmerWidget.box(
-                            width: 100.w,
-                            height: 50.h,
-                            colorWidget: Colors.white,
+                          loading: () => SizedBox(
+                            height: AppBar().preferredSize.height,
+                            child: Center(
+                              child: ShimmerWidget.box(
+                                width: 200.w,
+                                height: 40.h,
+                                colorWidget: Colors.white.withOpacity(0.2),
+                              ),
+                            ),
                           ),
                           error: (message) {
                             return AppBar().preferredSize.height.verticalSpace;
@@ -92,19 +98,29 @@ class _HomePageState extends State<HomePage> {
                               selectedLocation: location,
                             );
                           },
-                          orElse: () => const SizedBox(),
+                          orElse: () => SizedBox(
+                            height: AppBar().preferredSize.height,
+                          ),
                         );
                       },
                     ),
                     18.verticalSpace,
-                    BlocSelector<HomeBloc, HomeState,
-                        UIState<ForecastWeatherEntity>>(
+                    BlocSelector<HomeBloc, HomeState, UIState<WeatherEntity>>(
                       selector: (state) => state.currentWeatherCondition,
                       builder: (context, stateData) {
                         return stateData.maybeWhen(
                           error: (message) {
-                            return SizedBox(
-                              height: 106.h + 20.sp,
+                            return GeneralEmptyErrorWidget(
+                              customHeightContent: 130.h + 20.sp,
+                              heightImage: 110.h,
+                              customUrlImage: LottieAssetsConst.animError2,
+                              titleText: '',
+                              descText: message,
+                              customDescTextStyle: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                              ),
                             );
                           },
                           loading: () {
@@ -130,23 +146,23 @@ class _HomePageState extends State<HomePage> {
                                     color: Colors.white,
                                   ),
                                 ),
+                                4.verticalSpace,
+                                Text(
+                                  DateTime.now().extToFormattedString(
+                                    outputDateFormat: 'EEEE, dd MMMM yyyy',
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ],
                             );
                           },
                           orElse: () => const SizedBox(),
                         );
                       },
-                    ),
-                    4.verticalSpace,
-                    Text(
-                      DateTime.now().extToFormattedString(
-                        outputDateFormat: 'EEEE, dd MMMM yyyy',
-                      ),
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
                     ),
                     18.verticalSpace,
                     const CardForecastComponent(),

@@ -97,6 +97,11 @@ class LocationRemoteDataSourceImpl extends LocationRemoteDataSource {
       }
       return DataState.success(data: result);
     } catch (e, stackTrace) {
+      if (e.toString().contains('Could not find any result')) {
+        return const DataState.success(
+          data: [],
+        );
+      }
       return DataState.error(
         message: 'Error : $e',
         stackTrace: stackTrace,

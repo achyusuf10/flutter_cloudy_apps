@@ -1,8 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api
-
-import 'package:cloudy/utils/extensions/date_time_ext.dart';
-import 'package:cloudy/utils/extensions/string_ext.dart';
-
 class ResHistoryWeather {
   final _Location? location;
   final _Forecast? forecast;
@@ -65,11 +60,7 @@ class _Forecastday {
   });
 
   factory _Forecastday.fromJson(Map<String, dynamic> json) => _Forecastday(
-        date: json["date"] == null
-            ? null
-            : (json["date"] as String).extToDateTime(
-                originFormatDate: 'yyyy-MM-dd',
-              ),
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
         dateEpoch: json["date_epoch"],
         day: json["day"] == null ? null : _Day.fromJson(json["day"]),
         astro: json["astro"] == null ? null : _Astro.fromJson(json["astro"]),
@@ -79,7 +70,8 @@ class _Forecastday {
       );
 
   Map<String, dynamic> toJson() => {
-        "date": date!.extToFormattedString(),
+        "date":
+            "${date!.year.toString().padLeft(4, '0')}-${date!.month.toString().padLeft(2, '0')}-${date!.day.toString().padLeft(2, '0')}",
         "date_epoch": dateEpoch,
         "day": day?.toJson(),
         "astro": astro?.toJson(),
@@ -132,20 +124,20 @@ class _Day {
   final double? mintempF;
   final double? avgtempC;
   final double? avgtempF;
-  final int? maxwindMph;
+  final double? maxwindMph;
   final double? maxwindKph;
   final double? totalprecipMm;
   final double? totalprecipIn;
-  final int? totalsnowCm;
+  final double? totalsnowCm;
   final double? avgvisKm;
-  final int? avgvisMiles;
+  final double? avgvisMiles;
   final int? avghumidity;
   final int? dailyWillItRain;
   final int? dailyChanceOfRain;
   final int? dailyWillItSnow;
   final int? dailyChanceOfSnow;
   final _Condition? condition;
-  final int? uv;
+  final double? uv;
 
   _Day({
     this.maxtempC,
@@ -253,12 +245,11 @@ class _Hour {
   final double? windMph;
   final double? windKph;
   final int? windDegree;
-  final String? windDir;
-  final int? pressureMb;
+  final double? pressureMb;
   final double? pressureIn;
   final double? precipMm;
   final double? precipIn;
-  final int? snowCm;
+  final double? snowCm;
   final int? humidity;
   final int? cloud;
   final double? feelslikeC;
@@ -273,11 +264,11 @@ class _Hour {
   final int? chanceOfRain;
   final int? willItSnow;
   final int? chanceOfSnow;
-  final int? visKm;
-  final int? visMiles;
+  final double? visKm;
+  final double? visMiles;
   final double? gustMph;
   final double? gustKph;
-  final int? uv;
+  final double? uv;
 
   _Hour({
     this.timeEpoch,
@@ -289,7 +280,6 @@ class _Hour {
     this.windMph,
     this.windKph,
     this.windDegree,
-    this.windDir,
     this.pressureMb,
     this.pressureIn,
     this.precipMm,
@@ -328,7 +318,6 @@ class _Hour {
         windMph: json["wind_mph"]?.toDouble(),
         windKph: json["wind_kph"]?.toDouble(),
         windDegree: json["wind_degree"],
-        windDir: json["wind_dir"],
         pressureMb: json["pressure_mb"],
         pressureIn: json["pressure_in"]?.toDouble(),
         precipMm: json["precip_mm"]?.toDouble(),
@@ -365,7 +354,6 @@ class _Hour {
         "wind_mph": windMph,
         "wind_kph": windKph,
         "wind_degree": windDegree,
-        "wind_dir": windDir,
         "pressure_mb": pressureMb,
         "pressure_in": pressureIn,
         "precip_mm": precipMm,
