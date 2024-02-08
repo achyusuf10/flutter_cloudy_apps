@@ -57,4 +57,14 @@ class GetCurrentCityWeatherParams {
   final LocationResultEntity location;
 
   GetCurrentCityWeatherParams({required this.location});
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is GetCurrentCityWeatherParams && other.location == location;
+  }
+
+  @override
+  int get hashCode => location.hashCode;
 }

@@ -1,4 +1,5 @@
 import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart';
+import 'package:flutter/foundation.dart';
 
 class ForecastWeatherEntity {
   final List<WeatherEntity> datas;
@@ -60,4 +61,22 @@ class ForecastWeatherEntity {
           map['datas']?.map((x) => WeatherEntity.fromJson(x))),
     );
   }
+
+  factory ForecastWeatherEntity.initial() => ForecastWeatherEntity(
+        datas: [
+          WeatherEntity.initalYesterday(),
+          WeatherEntity.initalCurrent(),
+          WeatherEntity.initalTomorrow(),
+        ],
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ForecastWeatherEntity && listEquals(other.datas, datas);
+  }
+
+  @override
+  int get hashCode => datas.hashCode;
 }

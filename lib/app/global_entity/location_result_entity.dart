@@ -76,4 +76,27 @@ class LocationResultEntity {
       country: map['country'] ?? '',
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is LocationResultEntity &&
+        other.latitude == latitude &&
+        other.longitude == longitude &&
+        other.locality == locality &&
+        other.subAdministrativeArea == subAdministrativeArea &&
+        other.administrativeArea == administrativeArea &&
+        other.country == country;
+  }
+
+  @override
+  int get hashCode {
+    return latitude.hashCode ^
+        longitude.hashCode ^
+        locality.hashCode ^
+        subAdministrativeArea.hashCode ^
+        administrativeArea.hashCode ^
+        country.hashCode;
+  }
 }

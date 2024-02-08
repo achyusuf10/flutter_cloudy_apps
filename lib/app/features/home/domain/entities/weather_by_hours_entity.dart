@@ -116,4 +116,29 @@ class WeatherByHoursEntity {
       conditionCode: map['conditionCode']?.toInt() ?? 0,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is WeatherByHoursEntity &&
+        other.time == time &&
+        other.condition == condition &&
+        other.temperature == temperature &&
+        other.windPressure == windPressure &&
+        other.uvIndex == uvIndex &&
+        other.humidity == humidity &&
+        other.conditionCode == conditionCode;
+  }
+
+  @override
+  int get hashCode {
+    return time.hashCode ^
+        condition.hashCode ^
+        temperature.hashCode ^
+        windPressure.hashCode ^
+        uvIndex.hashCode ^
+        humidity.hashCode ^
+        conditionCode.hashCode;
+  }
 }

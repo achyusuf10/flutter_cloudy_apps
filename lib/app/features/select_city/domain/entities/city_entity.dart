@@ -23,4 +23,16 @@ class CityEntity {
       forecastData: ForecastWeatherEntity.fromJson(map['forecastData']),
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is CityEntity &&
+        other.locationData == locationData &&
+        other.forecastData == forecastData;
+  }
+
+  @override
+  int get hashCode => locationData.hashCode ^ forecastData.hashCode;
 }

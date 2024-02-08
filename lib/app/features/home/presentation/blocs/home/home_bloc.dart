@@ -68,8 +68,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         resCurrentCity.map(
           success: (successCurrentCity) {
-            AppLogger.logData('kesini loh');
-
             _foreCastWeatherEntity = successCurrentCity.data.forecastData;
             var selectedWeather = _getEntityByIndex(state.selectedIndexDay);
             var currentWeather = _getEntityByIndex(1);

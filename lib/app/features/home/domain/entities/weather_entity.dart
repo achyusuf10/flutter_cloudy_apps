@@ -1,4 +1,6 @@
 import 'package:cloudy/app/features/home/domain/entities/weather_by_hours_entity.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class WeatherEntity {
   final DateTime date;
@@ -44,4 +46,64 @@ class WeatherEntity {
           map['listItem']?.map((x) => WeatherByHoursEntity.fromJson(x))),
     );
   }
+
+  factory WeatherEntity.initalCurrent() => WeatherEntity(
+        date: DateTime.now(),
+        listItem: List.generate(
+          4,
+          (index) => WeatherByHoursEntity(
+            time: TimeOfDay.now(),
+            condition: '',
+            temperature: 0.0,
+            windPressure: 0.0,
+            uvIndex: 0.0,
+            humidity: 0.0,
+            conditionCode: 0,
+          ),
+        ),
+      );
+  factory WeatherEntity.initalYesterday() => WeatherEntity(
+        date: DateTime.now().subtract(const Duration(days: 1)),
+        listItem: List.generate(
+          4,
+          (index) => WeatherByHoursEntity(
+            time: TimeOfDay.fromDateTime(
+                DateTime.now().subtract(const Duration(days: 1))),
+            condition: '',
+            temperature: 0.0,
+            windPressure: 0.0,
+            uvIndex: 0.0,
+            humidity: 0.0,
+            conditionCode: 0,
+          ),
+        ),
+      );
+  factory WeatherEntity.initalTomorrow() => WeatherEntity(
+        date: DateTime.now().add(const Duration(days: 1)),
+        listItem: List.generate(
+          4,
+          (index) => WeatherByHoursEntity(
+            time: TimeOfDay.fromDateTime(
+                DateTime.now().add(const Duration(days: 1))),
+            condition: '',
+            temperature: 0.0,
+            windPressure: 0.0,
+            uvIndex: 0.0,
+            humidity: 0.0,
+            conditionCode: 0,
+          ),
+        ),
+      );
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is WeatherEntity &&
+        other.date == date &&
+        listEquals(other.listItem, listItem);
+  }
+
+  @override
+  int get hashCode => date.hashCode ^ listItem.hashCode;
 }
