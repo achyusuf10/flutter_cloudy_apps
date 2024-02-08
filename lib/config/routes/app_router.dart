@@ -34,11 +34,11 @@ class AppRouter extends _$AppRouter {
         ),
         AutoRoute(
           page: PickLocationRoute.page,
-          path: Routes.selectCityPage,
+          path: Routes.pickLocationPage,
         ),
         AutoRoute(
           page: SelectCityRoute.page,
-          path: Routes.pickLocationPage,
+          path: Routes.selectCityPage,
         ),
       ];
 }

@@ -3,6 +3,8 @@ class ImageAssetsConst {
 
   static const dialogSuccess = 'assets/images/dialog_success.png';
   static const dialogFailed = 'assets/images/dialog_failed.png';
+  static const bgHome = 'assets/images/bg_home.png';
+
   static const icCloudy = "assets/images/ic_cloudy.png";
   static const icHeavyRain = "assets/images/ic_heavy_rain.png";
   static const icHeavyRainWithThunder =

@@ -216,6 +216,7 @@ void createFeature({
   await createFolder('$featuresPath$snakeCaseFeature/presentation/pages');
   await createFolder('$featuresPath$snakeCaseFeature/presentation/components');
   await createFolder('$featuresPath$snakeCaseFeature/presentation/blocs');
+  await createFolder('$featuresPath$snakeCaseFeature/presentation/widgets');
 }
 
 void createRepository({

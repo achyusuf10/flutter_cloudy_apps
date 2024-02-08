@@ -10,4 +10,12 @@ class AppGradient {
           AppColors.secondary500,
         ],
       );
+  static LinearGradient get primarySecondary => const LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          AppColors.primary500,
+          AppColors.secondary500,
+        ],
+      );
 }

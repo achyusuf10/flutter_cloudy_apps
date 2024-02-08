@@ -212,7 +212,7 @@ abstract class ${nameRepository}Repository {
     String temp = featuresPath.replaceAll('lib/', '');
     String repoSnakeCase = DataConverter.pascalCaseToSnakeCase(nameRepository);
     return """
-${getImportCurPackage()}/$temp$nameFeature/data/repositories/${repoSnakeCase}_repository.dart';
+${getImportCurPackage()}/$temp$nameFeature/domain/repositories/${repoSnakeCase}_repository.dart';
 import 'package:injectable/injectable.dart';
 @LazySingleton(as: ${nameRepository}Repository)
 class ${nameRepository}RepositoryImpl extends ${nameRepository}Repository{

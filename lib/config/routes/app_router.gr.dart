@@ -22,7 +22,7 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     PickLocationRoute.name: (routeData) {
-      return AutoRoutePage<LocationResultEntity>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const PickLocationPage(),
       );
