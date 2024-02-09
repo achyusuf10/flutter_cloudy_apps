@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://raw.githubusercontent.com/achyusuf10/assets_storage/main/flutter_cloudy_apps/ic_launcher.png" alt="Cloudy" width="192"></a>
+  <img src="https://raw.githubusercontent.com/achyusuf10/assets_storage/main/flutter_cloudy_apps/ic_launcher.png" alt="Cloudy" width="200">
   <br>
   Cloudy
   <br>
@@ -21,9 +21,16 @@ The key features offered by the Cloudy application include:
 
 In addition to the main features above, Cloudy also offers a smooth and responsive user experience, support for weather notifications, and regular weather data updates to ensure information accuracy. With Cloudy, users can easily access the weather information they need, wherever and whenever they need it.</h5>
 
+
 ## Videos Demonstration
 - [Part 1](https://drive.google.com/file/d/1E3xEyAABMay_sc_fjKUQvB5qVFSfBpQh/view?usp=drive_link) 
 - [Part 2](https://drive.google.com/file/d/1rRPWHM-wsQwvC8oKa6cUJklIsFNFEyWr/view?usp=drive_link) 
+
+
+## Screenshot
+<img src="https://raw.githubusercontent.com/achyusuf10/assets_storage/main/flutter_cloudy_apps/home.png" alt="HomePage" height="300">
+<img src="https://raw.githubusercontent.com/achyusuf10/assets_storage/main/flutter_cloudy_apps/select_area.png" alt="Select Area" height="300">
+<img src="https://raw.githubusercontent.com/achyusuf10/assets_storage/main/flutter_cloudy_apps/pick_location.png" alt="Pick Location" height="300">
 
 
 ## Key Features
@@ -32,6 +39,13 @@ In addition to the main features above, Cloudy also offers a smooth and responsi
 * Details Weather Condition
 * Search Area by Query
 * Pick Location From Map
+
+
+## Project Info
+- Use BLOC State Management
+- Use Dependency Injection Technique
+- Use Clean Architecture
+- Use https://www.weatherapi.com/ for api datas
 
 ## How To Use
 
@@ -50,6 +64,15 @@ $ flutter pub get
 # Run the app
 $ flutter run
 ```
+### If You Want Use Your Api Key
+
+1. Login https://www.weatherapi.com/
+2. Get Api Key From Dashboard
+3. Change value api key in [ _*lib/constants/common/app_const.dart*_ ] 
+
+<img src="assets/github/api_key.png" alt="Pick Location" height="100">
+
+4. Then Re Run Project Or Just Use Hot Restart
 
 ## Support
 
