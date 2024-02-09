@@ -9,7 +9,7 @@ import 'package:cloudy/app/features/home/data/repositories/weather_repository_im
     as _i3;
 import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart'
     as _i5;
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart'
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart'
     as _i6;
 import 'package:cloudy/core/state/data_state.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -125,85 +125,85 @@ class MockWeatherRepositoryImpl extends _i1.Mock
       ) as _i4.Future<_i2.DataState<_i5.WeatherEntity>>);
 
   @override
-  _i4.Future<_i2.DataState<String>> saveWeatherByLocationToLocal(
-          {required List<_i6.CityEntity>? listCity}) =>
+  _i4.Future<_i2.DataState<String>> saveWeatherByAreaToLocal(
+          {required List<_i6.AreaEntity>? listArea}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #saveWeatherByLocationToLocal,
+          #saveWeatherByAreaToLocal,
           [],
-          {#listCity: listCity},
+          {#listCity: listArea},
         ),
         returnValue:
             _i4.Future<_i2.DataState<String>>.value(_FakeDataState_0<String>(
           this,
           Invocation.method(
-            #saveWeatherByLocationToLocal,
+            #saveWeatherByAreaToLocal,
             [],
-            {#listCity: listCity},
+            {#listCity: listArea},
           ),
         )),
         returnValueForMissingStub:
             _i4.Future<_i2.DataState<String>>.value(_FakeDataState_0<String>(
           this,
           Invocation.method(
-            #saveWeatherByLocationToLocal,
+            #saveWeatherByAreaToLocal,
             [],
-            {#listCity: listCity},
+            {#listCity: listArea},
           ),
         )),
       ) as _i4.Future<_i2.DataState<String>>);
 
   @override
-  _i4.Future<_i2.DataState<List<_i6.CityEntity>>>
-      getListCityByLocationFromLocal() => (super.noSuchMethod(
+  _i4.Future<_i2.DataState<List<_i6.AreaEntity>>>
+      getListWeatherByAreaFromLocal() => (super.noSuchMethod(
             Invocation.method(
-              #getListCityByLocationFromLocal,
+              #getListWeatherByAreaFromLocal,
               [],
             ),
-            returnValue: _i4.Future<_i2.DataState<List<_i6.CityEntity>>>.value(
-                _FakeDataState_0<List<_i6.CityEntity>>(
+            returnValue: _i4.Future<_i2.DataState<List<_i6.AreaEntity>>>.value(
+                _FakeDataState_0<List<_i6.AreaEntity>>(
               this,
               Invocation.method(
-                #getListCityByLocationFromLocal,
+                #getListWeatherByAreaFromLocal,
                 [],
               ),
             )),
             returnValueForMissingStub:
-                _i4.Future<_i2.DataState<List<_i6.CityEntity>>>.value(
-                    _FakeDataState_0<List<_i6.CityEntity>>(
+                _i4.Future<_i2.DataState<List<_i6.AreaEntity>>>.value(
+                    _FakeDataState_0<List<_i6.AreaEntity>>(
               this,
               Invocation.method(
-                #getListCityByLocationFromLocal,
+                #getListWeatherByAreaFromLocal,
                 [],
               ),
             )),
-          ) as _i4.Future<_i2.DataState<List<_i6.CityEntity>>>);
+          ) as _i4.Future<_i2.DataState<List<_i6.AreaEntity>>>);
 
   @override
-  _i4.Future<_i2.DataState<String>> addWeatherByLocationToLocal(
-          {required _i6.CityEntity? cityEntity}) =>
+  _i4.Future<_i2.DataState<String>> addWeatherByAreaToLocal(
+          {required _i6.AreaEntity? areaEntity}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #addWeatherByLocationToLocal,
+          #addWeatherByAreaToLocal,
           [],
-          {#cityEntity: cityEntity},
+          {#cityEntity: areaEntity},
         ),
         returnValue:
             _i4.Future<_i2.DataState<String>>.value(_FakeDataState_0<String>(
           this,
           Invocation.method(
-            #addWeatherByLocationToLocal,
+            #addWeatherByAreaToLocal,
             [],
-            {#cityEntity: cityEntity},
+            {#cityEntity: areaEntity},
           ),
         )),
         returnValueForMissingStub:
             _i4.Future<_i2.DataState<String>>.value(_FakeDataState_0<String>(
           this,
           Invocation.method(
-            #addWeatherByLocationToLocal,
+            #addWeatherByAreaToLocal,
             [],
-            {#cityEntity: cityEntity},
+            {#cityEntity: areaEntity},
           ),
         )),
       ) as _i4.Future<_i2.DataState<String>>);

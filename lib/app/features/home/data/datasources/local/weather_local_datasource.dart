@@ -7,10 +7,9 @@ import 'package:cloudy/core/state/data_state.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class WeatherLocalDataSource {
-  Future<DataState<String>> saveWeatherByLocation(
-      List<Map<String, dynamic>> data);
+  Future<DataState<String>> saveWeatherByArea(List<Map<String, dynamic>> data);
 
-  Future<DataState<List<Map<String, dynamic>>>> getWeatherByLocation();
+  Future<DataState<List<Map<String, dynamic>>>> getWeatherByArea();
 }
 
 @LazySingleton(as: WeatherLocalDataSource)
@@ -20,7 +19,7 @@ class WeatherLocalDataSourceImpl extends WeatherLocalDataSource {
   WeatherLocalDataSourceImpl(this._hive);
 
   @override
-  Future<DataState<String>> saveWeatherByLocation(
+  Future<DataState<String>> saveWeatherByArea(
       List<Map<String, dynamic>> data) async {
     try {
       await _hive.set(
@@ -38,7 +37,7 @@ class WeatherLocalDataSourceImpl extends WeatherLocalDataSource {
   }
 
   @override
-  Future<DataState<List<Map<String, dynamic>>>> getWeatherByLocation() async {
+  Future<DataState<List<Map<String, dynamic>>>> getWeatherByArea() async {
     try {
       var resList = await _hive.get(
         key: HiveConst.keyWeatherByCity,

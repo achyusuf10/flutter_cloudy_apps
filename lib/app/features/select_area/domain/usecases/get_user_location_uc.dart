@@ -1,4 +1,4 @@
-import 'package:cloudy/app/features/select_city/domain/repositories/location_repository.dart';
+import 'package:cloudy/app/features/select_area/domain/repositories/location_repository.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
 import 'package:cloudy/core/state/data_state.dart';
 import 'package:cloudy/core/usecases/no_params_usecase.dart';

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cloudy/app/features/home/presentation/pages/home_page.dart';
 import 'package:cloudy/app/features/pick_location/presentation/pages/pick_location_page.dart';
-import 'package:cloudy/app/features/select_city/presentation/pages/select_city_page.dart';
+import 'package:cloudy/app/features/select_area/presentation/pages/select_area_page.dart';
 import 'package:cloudy/app/features/splash/presentation/pages/splash_page.dart';
 import 'package:cloudy/config/routes/routes.dart';
 import 'package:injectable/injectable.dart';
@@ -36,8 +36,8 @@ class AppRouter extends _$AppRouter {
           path: Routes.pickLocationPage,
         ),
         AutoRoute(
-          page: SelectCityRoute.page,
-          path: Routes.selectCityPage,
+          page: SelectAreaRoute.page,
+          path: Routes.selectAreaPage,
         ),
       ];
 }

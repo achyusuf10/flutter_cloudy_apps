@@ -7,15 +7,15 @@ import 'dart:async' as _i5;
 
 import 'package:cloudy/app/features/home/domain/entities/forecast_weather_entity.dart'
     as _i6;
-import 'package:cloudy/app/features/home/domain/usecases/add_city_to_local_uc.dart'
+import 'package:cloudy/app/features/home/domain/usecases/add_area_to_local_uc.dart'
     as _i11;
 import 'package:cloudy/app/features/home/domain/usecases/get_current_city_weather_uc.dart'
     as _i9;
 import 'package:cloudy/app/features/home/domain/usecases/get_forecast_weather_uc.dart'
     as _i4;
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart'
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart'
     as _i10;
-import 'package:cloudy/app/features/select_city/domain/usecases/get_user_location_uc.dart'
+import 'package:cloudy/app/features/select_area/domain/usecases/get_user_location_uc.dart'
     as _i7;
 import 'package:cloudy/app/global_entity/location_result_entity.dart' as _i8;
 import 'package:cloudy/core/state/data_state.dart' as _i2;
@@ -126,15 +126,15 @@ class MockGetUserLocationUC extends _i1.Mock implements _i7.GetUserLocationUC {
 class MockGetCurrentCityWeatherUC extends _i1.Mock
     implements _i9.GetCurrentCityWeatherUC {
   @override
-  _i5.Future<_i2.DataState<_i10.CityEntity>> call(
+  _i5.Future<_i2.DataState<_i10.AreaEntity>> call(
           _i9.GetCurrentCityWeatherParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [params],
         ),
-        returnValue: _i5.Future<_i2.DataState<_i10.CityEntity>>.value(
-            _FakeDataState_0<_i10.CityEntity>(
+        returnValue: _i5.Future<_i2.DataState<_i10.AreaEntity>>.value(
+            _FakeDataState_0<_i10.AreaEntity>(
           this,
           Invocation.method(
             #call,
@@ -142,23 +142,23 @@ class MockGetCurrentCityWeatherUC extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.DataState<_i10.CityEntity>>.value(
-                _FakeDataState_0<_i10.CityEntity>(
+            _i5.Future<_i2.DataState<_i10.AreaEntity>>.value(
+                _FakeDataState_0<_i10.AreaEntity>(
           this,
           Invocation.method(
             #call,
             [params],
           ),
         )),
-      ) as _i5.Future<_i2.DataState<_i10.CityEntity>>);
+      ) as _i5.Future<_i2.DataState<_i10.AreaEntity>>);
 }
 
-/// A class which mocks [AddCityToLocalUC].
+/// A class which mocks [AddAreaToLocalUC].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAddCityToLocalUC extends _i1.Mock implements _i11.AddCityToLocalUC {
+class MockAddAreaToLocalUC extends _i1.Mock implements _i11.AddAreaToLocalUC {
   @override
-  _i5.Future<_i2.DataState<String>> call(_i11.AddCityToLocalParams? params) =>
+  _i5.Future<_i2.DataState<String>> call(_i11.AddAreaToLocalParams? params) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,

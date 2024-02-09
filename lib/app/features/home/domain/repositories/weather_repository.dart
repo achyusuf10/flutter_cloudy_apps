@@ -1,5 +1,5 @@
 import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart';
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart';
 import 'package:cloudy/core/state/data_state.dart';
 
 abstract class WeatherRepository {
@@ -9,32 +9,39 @@ abstract class WeatherRepository {
     required double longitude,
   });
 
+  /// Retrieves the weather data for yesterday based on the given latitude and longitude.
+  /// Returns a [Future] that resolves to a [DataState] containing the [WeatherEntity].
+  /// The [latitude] parameter specifies the latitude of the location.
+  /// The [longitude] parameter specifies the longitude of the location.
   Future<DataState<WeatherEntity>> getYesterdayWeather({
     required double latitude,
     required double longitude,
   });
 
-  /// Saves the weather data for a list of cities to the local storage.
-  ///
-  /// The [listCity] parameter is a required list of [CityEntity] objects representing the cities for which the weather data will be saved.
-  ///
-  /// Returns a [Future] that completes with a [DataState<String>] object representing the state of the operation.
-  /// The [DataState] object contains a [String] value that represents the result of the operation.
-  Future<DataState<String>> saveWeatherByLocationToLocal({
-    required List<CityEntity> listCity,
-  });
-
-  /// Adds weather data for a specific location to the local storage.
+  /// Saves the weather data for a list of areas to the local storage.
   ///
   /// Returns a [Future] that completes with a [DataState] containing a [String].
-  /// The [cityEntity] parameter is required and represents the city for which
-  /// the weather data is being added.
-  Future<DataState<String>> addWeatherByLocationToLocal({
-    required CityEntity cityEntity,
+  /// The [DataState] represents the state of the operation, including any errors or success.
+  /// The [listArea] parameter is a required list of [AreaEntity] objects representing the areas for which the weather data should be saved.
+
+  Future<DataState<String>> saveWeatherByAreaToLocal({
+    required List<AreaEntity> listArea,
   });
 
-  /// Retrieves a list of city entities based on the current location from the local storage.
+  /// Adds weather data for a specific area to the local storage.
   ///
-  /// Returns a [Future] that resolves to a [DataState] containing a list of [CityEntity].
-  Future<DataState<List<CityEntity>>> getListCityByLocationFromLocal();
+  /// Returns a [Future] that completes with a [DataState] containing a [String].
+  /// The [DataState] represents the state of the operation, while the [String]
+  /// contains any relevant information or error message.
+  ///
+  /// The [areaEntity] parameter is required and represents the area for which
+  /// the weather data will be added.
+  Future<DataState<String>> addWeatherByAreaToLocal({
+    required AreaEntity areaEntity,
+  });
+
+  /// Retrieves a list of weather data for multiple areas from the local storage.
+  ///
+  /// Returns a [Future] that resolves to a [DataState] containing a list of [AreaEntity].
+  Future<DataState<List<AreaEntity>>> getListWeatherByAreaFromLocal();
 }

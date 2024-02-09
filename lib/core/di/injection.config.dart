@@ -16,33 +16,37 @@ import 'package:cloudy/app/features/home/data/repositories/weather_repository_im
     as _i13;
 import 'package:cloudy/app/features/home/domain/repositories/weather_repository.dart'
     as _i12;
-import 'package:cloudy/app/features/home/domain/usecases/add_city_to_local_uc.dart'
+import 'package:cloudy/app/features/home/domain/usecases/add_area_to_local_uc.dart'
     as _i14;
 import 'package:cloudy/app/features/home/domain/usecases/get_current_city_weather_uc.dart'
     as _i16;
 import 'package:cloudy/app/features/home/domain/usecases/get_forecast_weather_uc.dart'
     as _i17;
 import 'package:cloudy/app/features/home/presentation/blocs/home/home_bloc.dart'
-    as _i21;
-import 'package:cloudy/app/features/select_city/data/datasources/remote/location_remote_datasource.dart'
-    as _i7;
-import 'package:cloudy/app/features/select_city/data/repositories/location_repository_impl.dart'
-    as _i9;
-import 'package:cloudy/app/features/select_city/domain/repositories/location_repository.dart'
-    as _i8;
-import 'package:cloudy/app/features/select_city/domain/usecases/get_history_city_uc.dart'
-    as _i18;
-import 'package:cloudy/app/features/select_city/domain/usecases/get_list_city_by_query_uc.dart'
-    as _i19;
-import 'package:cloudy/app/features/select_city/domain/usecases/get_user_location_uc.dart'
-    as _i20;
-import 'package:cloudy/app/features/select_city/presentation/blocs/select_city/select_city_cubit.dart'
     as _i22;
-import 'package:cloudy/app/features/splash/presentation/blocs/splash/splash_cubit.dart'
+import 'package:cloudy/app/features/pick_location/domain/usecases/get_location_uc.dart'
+    as _i20;
+import 'package:cloudy/app/features/pick_location/presentation/blocs/pick_location/pick_location_cubit.dart'
     as _i23;
+import 'package:cloudy/app/features/select_area/data/datasources/remote/location_remote_datasource.dart'
+    as _i7;
+import 'package:cloudy/app/features/select_area/data/repositories/location_repository_impl.dart'
+    as _i9;
+import 'package:cloudy/app/features/select_area/domain/repositories/location_repository.dart'
+    as _i8;
+import 'package:cloudy/app/features/select_area/domain/usecases/get_history_weather_area_uc.dart'
+    as _i18;
+import 'package:cloudy/app/features/select_area/domain/usecases/get_list_location_by_query_uc.dart'
+    as _i19;
+import 'package:cloudy/app/features/select_area/domain/usecases/get_user_location_uc.dart'
+    as _i21;
+import 'package:cloudy/app/features/select_area/presentation/blocs/select_area/select_area_cubit.dart'
+    as _i24;
+import 'package:cloudy/app/features/splash/presentation/blocs/splash/splash_cubit.dart'
+    as _i25;
 import 'package:cloudy/config/routes/app_router.dart' as _i3;
 import 'package:cloudy/config/source_config/local/hive_config.dart' as _i6;
-import 'package:cloudy/core/di/module/injection_module.dart' as _i24;
+import 'package:cloudy/core/di/module/injection_module.dart' as _i26;
 import 'package:cloudy/utils/functions/get_context_func.dart' as _i5;
 import 'package:cloudy/utils/services/dialog_service.dart' as _i15;
 import 'package:dio/dio.dart' as _i4;
@@ -81,37 +85,43 @@ Future<_i1.GetIt> $initGetIt(
         gh<_i10.WeatherLocalDataSource>(),
         gh<_i11.WeatherRemoteDataSource>(),
       ));
-  gh.lazySingleton<_i14.AddCityToLocalUC>(
-      () => _i14.AddCityToLocalUC(gh<_i12.WeatherRepository>()));
+  gh.lazySingleton<_i14.AddAreaToLocalUC>(
+      () => _i14.AddAreaToLocalUC(gh<_i12.WeatherRepository>()));
   gh.lazySingleton<_i15.DialogService>(
       () => _i15.DialogService(gh<_i5.GetContextFunc>()));
   gh.lazySingleton<_i16.GetCurrentCityWeatherUC>(
       () => _i16.GetCurrentCityWeatherUC(gh<_i12.WeatherRepository>()));
   gh.lazySingleton<_i17.GetForecastWeatherUC>(
       () => _i17.GetForecastWeatherUC(gh<_i12.WeatherRepository>()));
-  gh.lazySingleton<_i18.GetHistoryCityUC>(
-      () => _i18.GetHistoryCityUC(gh<_i12.WeatherRepository>()));
-  gh.lazySingleton<_i19.GetListCityByQueryUC>(
-      () => _i19.GetListCityByQueryUC(gh<_i8.LocationRepository>()));
-  gh.lazySingleton<_i20.GetUserLocationUC>(
-      () => _i20.GetUserLocationUC(gh<_i8.LocationRepository>()));
-  gh.lazySingleton<_i21.HomeBloc>(() => _i21.HomeBloc(
+  gh.lazySingleton<_i18.GetHistoryWeatherByAreaUC>(
+      () => _i18.GetHistoryWeatherByAreaUC(gh<_i12.WeatherRepository>()));
+  gh.lazySingleton<_i19.GetListLocationByQueryUC>(
+      () => _i19.GetListLocationByQueryUC(gh<_i8.LocationRepository>()));
+  gh.lazySingleton<_i20.GetLocationUC>(
+      () => _i20.GetLocationUC(gh<_i8.LocationRepository>()));
+  gh.lazySingleton<_i21.GetUserLocationUC>(
+      () => _i21.GetUserLocationUC(gh<_i8.LocationRepository>()));
+  gh.lazySingleton<_i22.HomeBloc>(() => _i22.HomeBloc(
         gh<_i17.GetForecastWeatherUC>(),
-        gh<_i14.AddCityToLocalUC>(),
-        gh<_i20.GetUserLocationUC>(),
+        gh<_i14.AddAreaToLocalUC>(),
+        gh<_i21.GetUserLocationUC>(),
         gh<_i16.GetCurrentCityWeatherUC>(),
         gh<_i5.GetContextFunc>(),
       ));
-  gh.lazySingleton<_i22.SelectCityCubit>(() => _i22.SelectCityCubit(
-        gh<_i18.GetHistoryCityUC>(),
-        gh<_i19.GetListCityByQueryUC>(),
+  gh.lazySingleton<_i23.PickLocationCubit>(() => _i23.PickLocationCubit(
+        gh<_i21.GetUserLocationUC>(),
+        gh<_i20.GetLocationUC>(),
+      ));
+  gh.lazySingleton<_i24.SelectAreaCubit>(() => _i24.SelectAreaCubit(
+        gh<_i18.GetHistoryWeatherByAreaUC>(),
+        gh<_i19.GetListLocationByQueryUC>(),
         gh<_i5.GetContextFunc>(),
       ));
-  gh.lazySingleton<_i23.SplashCubit>(() => _i23.SplashCubit(
+  gh.lazySingleton<_i25.SplashCubit>(() => _i25.SplashCubit(
         gh<_i5.GetContextFunc>(),
         gh<_i15.DialogService>(),
       ));
   return getIt;
 }
 
-class _$InjectionModules extends _i24.InjectionModules {}
+class _$InjectionModules extends _i26.InjectionModules {}

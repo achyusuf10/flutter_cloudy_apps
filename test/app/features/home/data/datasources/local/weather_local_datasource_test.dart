@@ -1,7 +1,7 @@
 import 'package:cloudy/app/features/home/data/datasources/local/weather_local_datasource.dart';
 import 'package:cloudy/app/features/home/domain/entities/forecast_weather_entity.dart';
 import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart';
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
 import 'package:cloudy/config/source_config/local/hive_config_impl.dart';
 import 'package:cloudy/constants/core/hive_const.dart';
@@ -16,7 +16,7 @@ void main() {
   late WeatherLocalDataSourceImpl dataSource;
   late MockHiveConfigImpl hive;
 
-  CityEntity cityEntity = CityEntity(
+  AreaEntity cityEntity = AreaEntity(
     locationData: LocationResultEntity.initial(),
     forecastData: ForecastWeatherEntity(
       datas: List.generate(
@@ -54,7 +54,7 @@ void main() {
           );
 
           ///*  Act
-          var result = await dataSource.saveWeatherByLocation(listDataMap);
+          var result = await dataSource.saveWeatherByArea(listDataMap);
 
           ///* Assert
           var data = result.whenOrNull(success: (data) => data);
@@ -83,7 +83,7 @@ void main() {
           );
 
           ///*  Act
-          var result = await dataSource.getWeatherByLocation();
+          var result = await dataSource.getWeatherByArea();
 
           ///* Assert
           var data = result.whenOrNull(success: (data) => data);

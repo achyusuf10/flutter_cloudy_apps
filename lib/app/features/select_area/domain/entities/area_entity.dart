@@ -1,11 +1,11 @@
 import 'package:cloudy/app/features/home/domain/entities/forecast_weather_entity.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
 
-class CityEntity {
+class AreaEntity {
   final LocationResultEntity locationData;
   final ForecastWeatherEntity forecastData;
 
-  CityEntity({
+  AreaEntity({
     required this.locationData,
     required this.forecastData,
   });
@@ -17,8 +17,8 @@ class CityEntity {
     };
   }
 
-  factory CityEntity.fromJson(Map<String, dynamic> map) {
-    return CityEntity(
+  factory AreaEntity.fromJson(Map<String, dynamic> map) {
+    return AreaEntity(
       locationData: LocationResultEntity.fromJson(map['locationData']),
       forecastData: ForecastWeatherEntity.fromJson(map['forecastData']),
     );
@@ -28,7 +28,7 @@ class CityEntity {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is CityEntity &&
+    return other is AreaEntity &&
         other.locationData == locationData &&
         other.forecastData == forecastData;
   }

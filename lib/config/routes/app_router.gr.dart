@@ -27,10 +27,10 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const PickLocationPage(),
       );
     },
-    SelectCityRoute.name: (routeData) {
+    SelectAreaRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const SelectCityPage(),
+        child: const SelectAreaPage(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -71,15 +71,15 @@ class PickLocationRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [SelectCityPage]
-class SelectCityRoute extends PageRouteInfo<void> {
-  const SelectCityRoute({List<PageRouteInfo>? children})
+/// [SelectAreaPage]
+class SelectAreaRoute extends PageRouteInfo<void> {
+  const SelectAreaRoute({List<PageRouteInfo>? children})
       : super(
-          SelectCityRoute.name,
+          SelectAreaRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'SelectCityRoute';
+  static const String name = 'SelectAreaRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

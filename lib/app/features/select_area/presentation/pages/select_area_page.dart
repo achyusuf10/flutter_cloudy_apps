@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
-import 'package:cloudy/app/features/select_city/presentation/blocs/select_city/select_city_cubit.dart';
-import 'package:cloudy/app/features/select_city/presentation/widgets/card_city_widget.dart';
-import 'package:cloudy/app/features/select_city/presentation/widgets/card_location_widget.dart';
-import 'package:cloudy/app/features/select_city/presentation/widgets/search_text_widget.dart';
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart';
+import 'package:cloudy/app/features/select_area/presentation/blocs/select_area/select_area_cubit.dart';
+import 'package:cloudy/app/features/select_area/presentation/widgets/card_locality_city_widget.dart';
+import 'package:cloudy/app/features/select_area/presentation/widgets/card_location_widget.dart';
+import 'package:cloudy/app/features/select_area/presentation/widgets/search_text_widget.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
 import 'package:cloudy/app/widgets/general_empty_widget.dart';
 import 'package:cloudy/app/widgets/shimmer_widget.dart';
+import 'package:cloudy/config/routes/routes.dart';
 import 'package:cloudy/config/themes/app_colors.dart';
 import 'package:cloudy/core/state/ui_state.dart';
 import 'package:cloudy/utils/functions/get_controller_func.dart';
@@ -15,19 +16,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 @RoutePage()
-class SelectCityPage extends StatefulWidget {
-  const SelectCityPage({super.key});
+class SelectAreaPage extends StatefulWidget {
+  const SelectAreaPage({super.key});
 
   @override
-  State<SelectCityPage> createState() => _SelectCityPageState();
+  State<SelectAreaPage> createState() => _SelectAreaPageState();
 }
 
-class _SelectCityPageState extends State<SelectCityPage> {
-  late SelectCityCubit _selectCityCubit;
+class _SelectAreaPageState extends State<SelectAreaPage> {
+  late SelectAreaCubit _selectCityCubit;
 
   @override
   void initState() {
-    _selectCityCubit = GetControllerFunc.call<SelectCityCubit>(
+    _selectCityCubit = GetControllerFunc.call<SelectAreaCubit>(
       reset: true,
     );
     super.initState();
@@ -51,7 +52,7 @@ class _SelectCityPageState extends State<SelectCityPage> {
             ),
           ),
           title: Text(
-            'Select City',
+            'Select Area',
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
@@ -63,13 +64,32 @@ class _SelectCityPageState extends State<SelectCityPage> {
           children: [
             12.verticalSpace,
             SearchTextWidget(
-              hintText: 'Search City',
+              hintText: 'Enter area...',
               onSubmit: _selectCityCubit.onSubmitQuery,
               onChange: _selectCityCubit.onChangeTextField,
+              suffixWidget: IconButton(
+                constraints: const BoxConstraints(),
+                style: const ButtonStyle(
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                padding: EdgeInsets.zero,
+                onPressed: () {
+                  context.router.pushNamed(Routes.pickLocationPage).then(
+                    (value) {
+                      if (value is! LocationResultEntity) return;
+                      context.router.pop(value);
+                    },
+                  );
+                },
+                icon: const Icon(
+                  Icons.map_outlined,
+                  color: AppColors.gray500,
+                ),
+              ),
             ),
             14.verticalSpace,
             Expanded(
-              child: BlocSelector<SelectCityCubit, SelectCityState,
+              child: BlocSelector<SelectAreaCubit, SelectAreaState,
                   UIState<List<LocationResultEntity>>>(
                 selector: (state) => state.stateDataLocation,
                 builder: (context, stateData) {
@@ -111,8 +131,8 @@ class _SelectCityPageState extends State<SelectCityPage> {
                     ),
                     idle: () {
                       /// * Tampilan awal belum search
-                      return BlocSelector<SelectCityCubit, SelectCityState,
-                          UIState<List<CityEntity>>>(
+                      return BlocSelector<SelectAreaCubit, SelectAreaState,
+                          UIState<List<AreaEntity>>>(
                         selector: (state) => state.stateDataCity,
                         builder: (context, stateDataCity) {
                           return stateDataCity.maybeWhen(
@@ -125,7 +145,7 @@ class _SelectCityPageState extends State<SelectCityPage> {
                                 ),
                                 itemBuilder: (context, index) {
                                   var itemCity = listDataCity[index];
-                                  return CardCityWidget(
+                                  return CardLocalityCityWidget(
                                     onTap: (city) {
                                       _selectCityCubit.onTapCity(city);
                                     },

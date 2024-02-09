@@ -4,11 +4,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloudy/app/features/home/domain/entities/forecast_weather_entity.dart';
 import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart';
-import 'package:cloudy/app/features/home/domain/usecases/add_city_to_local_uc.dart';
+import 'package:cloudy/app/features/home/domain/usecases/add_area_to_local_uc.dart';
 import 'package:cloudy/app/features/home/domain/usecases/get_current_city_weather_uc.dart';
 import 'package:cloudy/app/features/home/domain/usecases/get_forecast_weather_uc.dart';
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
-import 'package:cloudy/app/features/select_city/domain/usecases/get_user_location_uc.dart';
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart';
+import 'package:cloudy/app/features/select_area/domain/usecases/get_user_location_uc.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
 import 'package:cloudy/config/routes/routes.dart';
 import 'package:cloudy/core/loggers/app_logger.dart';
@@ -26,7 +26,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetForecastWeatherUC _getForecastWeatherUC;
   final GetUserLocationUC _getUserLocationUC;
   final GetCurrentCityWeatherUC _getCurrentCityWeatherUC;
-  final AddCityToLocalUC _addCityToLocalUC;
+  final AddAreaToLocalUC _addCityToLocalUC;
   final GetContextFunc _getContextFunc;
   HomeBloc(
     this._getForecastWeatherUC,
@@ -52,6 +52,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         selectedLocation: const UIState.loading(),
       ),
     );
+
     var resPosition = await _getUserLocationUC.call();
     await resPosition.when(
       success: (dataLocation) async {
@@ -61,14 +62,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           ),
         );
 
-        /// * Check if already saved
-        var resCurrentCity = await _getCurrentCityWeatherUC.call(
+        /// * Check if area already saved
+        var resCurrentArea = await _getCurrentCityWeatherUC.call(
           GetCurrentCityWeatherParams(location: dataLocation),
         );
 
-        resCurrentCity.map(
-          success: (successCurrentCity) {
-            _foreCastWeatherEntity = successCurrentCity.data.forecastData;
+        resCurrentArea.map(
+          success: (currentArea) {
+            _foreCastWeatherEntity = currentArea.data.forecastData;
             var selectedWeather = _getEntityByIndex(state.selectedIndexDay);
             var currentWeather = _getEntityByIndex(1);
 
@@ -86,7 +87,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   data: currentWeather,
                 ),
                 selectedLocation: UIState.success(
-                  data: successCurrentCity.data.locationData,
+                  data: currentArea.data.locationData,
                 ),
               ),
             );
@@ -108,8 +109,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 ),
               ),
             );
-
-            AppLogger.logData('kok gak ganti');
           },
         );
       },
@@ -170,9 +169,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
             /// * Save To Local
             _addCityToLocalUC.call(
-              AddCityToLocalParams(
-                replace: true,
-                city: CityEntity(
+              AddAreaToLocalParams(
+                city: AreaEntity(
                   locationData: dataLocation,
                   forecastData: dataForecast,
                 ),
@@ -241,7 +239,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> _onTapSelectCity(event, emit) async {
-    var res = await _getContextFunc.i.router.pushNamed(Routes.selectCityPage);
+    bool canTap = state.selectedWeatherCondition.maybeMap(
+      success: (data) {
+        return true;
+      },
+      orElse: () {
+        return false;
+      },
+    );
+    if (!canTap) return;
+    var res = await _getContextFunc.i.router.pushNamed(Routes.selectAreaPage);
     if (res == null) return;
     if (res is LocationResultEntity) {
       emit(
@@ -253,7 +260,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       return;
     }
-    if (res is CityEntity) {
+    if (res is AreaEntity) {
       _foreCastWeatherEntity = res.forecastData;
       var selectedWeather = _getEntityByIndex(state.selectedIndexDay);
       var currentWeather = _getEntityByIndex(1);

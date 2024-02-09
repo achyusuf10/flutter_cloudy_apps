@@ -23,7 +23,7 @@ class SplashCubit extends Cubit<SplashState> {
   }
 
   Future<void> _onInit() async {
-    Future.delayed(const Duration(seconds: 2));
+    Future.delayed(const Duration(seconds: 3));
     var request = await Geolocator.requestPermission();
     if (request == LocationPermission.deniedForever) {
       _dialogService.dialogProblem(

@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 class ResHistoryWeather {
   final _Location? location;
   final _Forecast? forecast;

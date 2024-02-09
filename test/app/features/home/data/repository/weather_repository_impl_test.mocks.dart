@@ -133,18 +133,18 @@ class MockWeatherRemoteDataSourceImpl extends _i1.Mock
 class MockWeatherLocalDataSourceImpl extends _i1.Mock
     implements _i7.WeatherLocalDataSourceImpl {
   @override
-  _i4.Future<_i2.DataState<String>> saveWeatherByLocation(
+  _i4.Future<_i2.DataState<String>> saveWeatherByArea(
           List<Map<String, dynamic>>? data) =>
       (super.noSuchMethod(
         Invocation.method(
-          #saveWeatherByLocation,
+          #saveWeatherByArea,
           [data],
         ),
         returnValue:
             _i4.Future<_i2.DataState<String>>.value(_FakeDataState_0<String>(
           this,
           Invocation.method(
-            #saveWeatherByLocation,
+            #saveWeatherByArea,
             [data],
           ),
         )),
@@ -152,36 +152,36 @@ class MockWeatherLocalDataSourceImpl extends _i1.Mock
             _i4.Future<_i2.DataState<String>>.value(_FakeDataState_0<String>(
           this,
           Invocation.method(
-            #saveWeatherByLocation,
+            #saveWeatherByArea,
             [data],
           ),
         )),
       ) as _i4.Future<_i2.DataState<String>>);
 
   @override
-  _i4.Future<_i2.DataState<List<Map<String, dynamic>>>>
-      getWeatherByLocation() => (super.noSuchMethod(
-            Invocation.method(
-              #getWeatherByLocation,
-              [],
-            ),
-            returnValue:
-                _i4.Future<_i2.DataState<List<Map<String, dynamic>>>>.value(
-                    _FakeDataState_0<List<Map<String, dynamic>>>(
-              this,
-              Invocation.method(
-                #getWeatherByLocation,
-                [],
-              ),
-            )),
-            returnValueForMissingStub:
-                _i4.Future<_i2.DataState<List<Map<String, dynamic>>>>.value(
-                    _FakeDataState_0<List<Map<String, dynamic>>>(
-              this,
-              Invocation.method(
-                #getWeatherByLocation,
-                [],
-              ),
-            )),
-          ) as _i4.Future<_i2.DataState<List<Map<String, dynamic>>>>);
+  _i4.Future<_i2.DataState<List<Map<String, dynamic>>>> getWeatherByArea() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getWeatherByArea,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.DataState<List<Map<String, dynamic>>>>.value(
+                _FakeDataState_0<List<Map<String, dynamic>>>(
+          this,
+          Invocation.method(
+            #getWeatherByArea,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.DataState<List<Map<String, dynamic>>>>.value(
+                _FakeDataState_0<List<Map<String, dynamic>>>(
+          this,
+          Invocation.method(
+            #getWeatherByArea,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.DataState<List<Map<String, dynamic>>>>);
 }

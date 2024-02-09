@@ -1,17 +1,17 @@
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart';
 import 'package:cloudy/config/themes/app_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CardCityWidget extends StatelessWidget {
-  const CardCityWidget({
+class CardLocalityCityWidget extends StatelessWidget {
+  const CardLocalityCityWidget({
     super.key,
     required this.itemCity,
     this.onTap,
   });
 
-  final CityEntity itemCity;
-  final Function(CityEntity item)? onTap;
+  final AreaEntity itemCity;
+  final Function(AreaEntity item)? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +41,18 @@ class CardCityWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    itemCity.locationData.subAdministrativeArea,
+                    itemCity.locationData.locality,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    itemCity.locationData.subAdministrativeArea,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
                       color: Colors.white,
                     ),
                   ),

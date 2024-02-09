@@ -4,5 +4,5 @@ class Routes {
   static const String splashPage = '/';
   static const String homePage = '/homePage';
   static const String pickLocationPage = '/pickLocationPage';
-  static const String selectCityPage = '/selectCityPage';
+  static const String selectAreaPage = '/selectAreaPage';
 }

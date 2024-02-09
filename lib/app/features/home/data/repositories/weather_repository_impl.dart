@@ -3,7 +3,7 @@ import 'package:cloudy/app/features/home/data/datasources/remote/weather_remote_
 import 'package:cloudy/app/features/home/domain/entities/weather_by_hours_entity.dart';
 import 'package:cloudy/app/features/home/domain/entities/weather_entity.dart';
 import 'package:cloudy/app/features/home/domain/repositories/weather_repository.dart';
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart';
 import 'package:cloudy/core/state/data_state.dart';
 import 'package:cloudy/utils/extensions/string_ext.dart';
 import 'package:flutter/material.dart';
@@ -128,16 +128,16 @@ class WeatherRepositoryImpl extends WeatherRepository {
   }
 
   @override
-  Future<DataState<String>> saveWeatherByLocationToLocal({
-    required List<CityEntity> listCity,
+  Future<DataState<String>> saveWeatherByAreaToLocal({
+    required List<AreaEntity> listArea,
   }) async {
     try {
-      var data = listCity
+      var data = listArea
           .map(
             (e) => e.toJson(),
           )
           .toList();
-      var res = await _localDataSource.saveWeatherByLocation(
+      var res = await _localDataSource.saveWeatherByArea(
         data,
       );
 
@@ -163,12 +163,12 @@ class WeatherRepositoryImpl extends WeatherRepository {
   }
 
   @override
-  Future<DataState<List<CityEntity>>> getListCityByLocationFromLocal() async {
+  Future<DataState<List<AreaEntity>>> getListWeatherByAreaFromLocal() async {
     try {
-      var res = await _localDataSource.getWeatherByLocation();
+      var res = await _localDataSource.getWeatherByArea();
       return res.when(
         success: (listMap) {
-          var listCity = listMap.map((e) => CityEntity.fromJson(e)).toList();
+          var listCity = listMap.map((e) => AreaEntity.fromJson(e)).toList();
           return DataState.success(data: listCity);
         },
         error: (message, _, statusCode, e, stackTrace) {
@@ -189,13 +189,17 @@ class WeatherRepositoryImpl extends WeatherRepository {
   }
 
   @override
-  Future<DataState<String>> addWeatherByLocationToLocal(
-      {required CityEntity cityEntity}) async {
-    var savedResult = await getListCityByLocationFromLocal();
+  Future<DataState<String>> addWeatherByAreaToLocal({
+    required AreaEntity areaEntity,
+  }) async {
+    var savedResult = await getListWeatherByAreaFromLocal();
     return savedResult.when(
       success: (listData) async {
-        return await saveWeatherByLocationToLocal(
-          listCity: [cityEntity] + listData,
+        return await saveWeatherByAreaToLocal(
+          listArea: [
+            areaEntity,
+            ...listData,
+          ],
         );
       },
       error: (message, _, statusCode, e, stackTrace) {

@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:cloudy/app/features/home/domain/entities/forecast_weather_entity.dart';
-import 'package:cloudy/app/features/home/domain/usecases/add_city_to_local_uc.dart';
+import 'package:cloudy/app/features/home/domain/usecases/add_area_to_local_uc.dart';
 import 'package:cloudy/app/features/home/domain/usecases/get_current_city_weather_uc.dart';
 import 'package:cloudy/app/features/home/domain/usecases/get_forecast_weather_uc.dart';
 import 'package:cloudy/app/features/home/presentation/blocs/home/home_bloc.dart';
-import 'package:cloudy/app/features/select_city/domain/entities/city_entity.dart';
-import 'package:cloudy/app/features/select_city/domain/usecases/get_user_location_uc.dart';
+import 'package:cloudy/app/features/select_area/domain/entities/area_entity.dart';
+import 'package:cloudy/app/features/select_area/domain/usecases/get_user_location_uc.dart';
 import 'package:cloudy/app/global_entity/location_result_entity.dart';
 import 'package:cloudy/core/state/data_state.dart';
 import 'package:cloudy/core/state/ui_state.dart';
@@ -19,21 +19,21 @@ import 'home_bloc_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<GetForecastWeatherUC>()])
 @GenerateNiceMocks([MockSpec<GetUserLocationUC>()])
 @GenerateNiceMocks([MockSpec<GetCurrentCityWeatherUC>()])
-@GenerateNiceMocks([MockSpec<AddCityToLocalUC>()])
+@GenerateNiceMocks([MockSpec<AddAreaToLocalUC>()])
 @GenerateNiceMocks([MockSpec<GetContextFunc>()])
 void main() {
   late HomeBloc bloc;
   late MockGetForecastWeatherUC mockGetForecastWeatherUC;
   late MockGetUserLocationUC mockGetUserLocationUC;
   late MockGetCurrentCityWeatherUC mockGetCurrentCityWeatherUC;
-  late MockAddCityToLocalUC mockAddCityToLocalUC;
+  late MockAddAreaToLocalUC mockAddAreaToLocalUC;
   late MockGetContextFunc mockGetContextFunc;
 
   final ForecastWeatherEntity forecastWeatherT =
       ForecastWeatherEntity.initial();
   final LocationResultEntity locationResultT = LocationResultEntity.initial();
 
-  final CityEntity cityT = CityEntity(
+  final AreaEntity cityT = AreaEntity(
     locationData: locationResultT,
     forecastData: forecastWeatherT,
   );
@@ -48,11 +48,11 @@ void main() {
       mockGetForecastWeatherUC = MockGetForecastWeatherUC();
       mockGetUserLocationUC = MockGetUserLocationUC();
       mockGetCurrentCityWeatherUC = MockGetCurrentCityWeatherUC();
-      mockAddCityToLocalUC = MockAddCityToLocalUC();
+      mockAddAreaToLocalUC = MockAddAreaToLocalUC();
       mockGetContextFunc = MockGetContextFunc();
       bloc = HomeBloc(
         mockGetForecastWeatherUC,
-        mockAddCityToLocalUC,
+        mockAddAreaToLocalUC,
         mockGetUserLocationUC,
         mockGetCurrentCityWeatherUC,
         mockGetContextFunc,
@@ -71,7 +71,7 @@ void main() {
     'On Started Event',
     () {
       blocTest<HomeBloc, HomeState>(
-        'Should emit success to all datas, when city already save in local',
+        'Should emit success to all datas, when area already save in local',
         build: () => bloc,
         act: (bloc) {
           when(

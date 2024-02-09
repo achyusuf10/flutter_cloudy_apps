@@ -14,22 +14,13 @@ class GetForecastWeatherUC
   @override
 
   /// Calls the weather repository to get the forecast weather and yesterday's weather based on the provided latitude and longitude.
-  /// Returns a [DataState] object containing the [ForecastWeatherEntity] if the operation is successful, or an error [DataState] if there is a failure.
+  /// Returns a [DataState] object containing the forecast weather entity.
   ///
-  /// The [params] parameter should contain the latitude and longitude values.
+  /// The [params] parameter should contain the latitude and longitude.
+  /// The [latitude] parameter represents the latitude of the location.
+  /// The [longitude] parameter represents the longitude of the location.
   ///
-  /// Example usage:
-  /// ```dart
-  /// var params = GetForecastWeatherParams(latitude: 37.7749, longitude: -122.4194);
-  /// var result = await GetForecastWeatherUC().call(params);
-  /// if (result.isSuccess) {
-  ///   var forecastWeather = result.data;
-  ///   // Do something with the forecast weather data
-  /// } else {
-  ///   var error = result.error;
-  ///   // Handle the error
-  /// }
-  /// ```
+  /// Throws an error if there is an issue retrieving the weather data.
   Future<DataState<ForecastWeatherEntity>> call(params) async {
     var resForecast = await _weatherRepository.getListWeather(
       latitude: params.latitude,

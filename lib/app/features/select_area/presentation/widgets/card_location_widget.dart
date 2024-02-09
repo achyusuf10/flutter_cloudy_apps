@@ -30,26 +30,27 @@ class CardLocationWidget extends StatelessWidget {
             ),
           ),
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              itemLocation.subAdministrativeArea,
+              '${itemLocation.locality}, ${itemLocation.subAdministrativeArea}',
               style: TextStyle(
                 fontSize: 14.sp,
                 color: Colors.black,
               ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
-            10.horizontalSpace,
-            Expanded(
-              child: Text(
-                '${itemLocation.administrativeArea}, ${itemLocation.country}',
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: AppColors.gray800,
-                ),
-                overflow: TextOverflow.ellipsis,
+            4.verticalSpace,
+            Text(
+              '${itemLocation.administrativeArea}, ${itemLocation.country}',
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: AppColors.gray800,
               ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ],
         ),

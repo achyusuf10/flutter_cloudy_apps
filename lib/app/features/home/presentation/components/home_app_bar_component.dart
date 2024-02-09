@@ -27,27 +27,33 @@ class HomeAppBarComponent extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      '${selectedLocation.subAdministrativeArea}, ${selectedLocation.administrativeArea}',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16).w,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          '${selectedLocation.locality}, ${selectedLocation.subAdministrativeArea}',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
-                    4.horizontalSpace,
-                    Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.white,
-                      size: 20.h,
-                    ),
-                  ],
+                      4.horizontalSpace,
+                      Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.white,
+                        size: 20.h,
+                      ),
+                    ],
+                  ),
                 ),
                 Text(
-                  selectedLocation.country,
+                  '${selectedLocation.administrativeArea}, ${selectedLocation.country}',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,
