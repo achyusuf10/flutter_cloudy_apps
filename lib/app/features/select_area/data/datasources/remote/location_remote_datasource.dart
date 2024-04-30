@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloudy/app/features/select_area/data/models/res_search_location.dart';
 import 'package:cloudy/core/state/data_state.dart';
 import 'package:geocoding/geocoding.dart';
@@ -46,6 +48,12 @@ class LocationRemoteDataSourceImpl extends LocationRemoteDataSource {
       );
 
       return DataState.success(data: currentPosition);
+    } on TimeoutException catch (e) {
+      return DataState.error(
+        message: 'Get Location Time Out, Please try again',
+        stackTrace: StackTrace.current,
+        exception: Exception(e),
+      );
     } catch (e, stackTrace) {
       return DataState.error(
         message: 'Error : $e',

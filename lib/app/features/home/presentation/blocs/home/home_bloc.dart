@@ -202,6 +202,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         return;
       },
       orElse: () async {
+        emit(
+          state.copyWith(
+            selectedLocation: const UIState.loading(),
+            selectedWeatherCondition: const UIState.loading(),
+            currentWeatherCondition: const UIState.loading(),
+          ),
+        );
         var resPosition = await _getUserLocationUC.call();
         resPosition.when(
           success: (data) {
@@ -216,6 +223,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             emit(
               state.copyWith(
                 selectedLocation: UIState.error(message: error),
+                currentWeatherCondition: UIState.error(message: error),
+                selectedWeatherCondition: UIState.error(message: error),
               ),
             );
           },
