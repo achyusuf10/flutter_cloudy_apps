@@ -1,4 +1,4 @@
-package yucodelabs.cloudy
+package yuordev.cloudy
 
 import io.flutter.embedding.android.FlutterActivity
 

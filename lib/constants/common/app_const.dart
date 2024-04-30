@@ -5,5 +5,5 @@ class AppConst {
 
   static Size designAppSize = const Size(360, 800);
 
-  static const keyApi = '3da7ca7529c34c99acb52341240502';
+  static const keyApi = 'f8fcc06bea18490a811142253243004';
 }
