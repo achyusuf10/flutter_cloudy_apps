@@ -8,7 +8,7 @@ class ImageAssetsConst {
   static const icCloudy = "assets/images/ic_cloudy.png";
   static const icHeavyRain = "assets/images/ic_heavy_rain.png";
   static const icHeavyRainWithThunder =
-      "assets/images/ic_heavy_rain_with_thunder_.png";
+      "assets/images/ic_heavy_rain_with_thunder.png";
   static const icLightRain = "assets/images/ic_light_rain.png";
   static const icLightRainWithThunder =
       "assets/images/ic_light_rain_with_thunder.png";
